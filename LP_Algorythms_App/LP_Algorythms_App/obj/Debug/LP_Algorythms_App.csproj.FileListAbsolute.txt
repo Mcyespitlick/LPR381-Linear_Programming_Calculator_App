@@ -8,3 +8,13 @@ C:\Belgium Campus\3rd year\LPR381\Project\LPR381 Project\LP_Algorythms_App\LP_Al
 C:\Belgium Campus\3rd year\LPR381\Project\LPR381 Project\LP_Algorythms_App\LP_Algorythms_App\obj\Debug\LP_Algorythms_App.csproj.CoreCompileInputs.cache
 C:\Belgium Campus\3rd year\LPR381\Project\LPR381 Project\LP_Algorythms_App\LP_Algorythms_App\obj\Debug\LP_Algorythms_App.exe
 C:\Belgium Campus\3rd year\LPR381\Project\LPR381 Project\LP_Algorythms_App\LP_Algorythms_App\obj\Debug\LP_Algorythms_App.pdb
+C:\Belgium Campus\3rd year\LPR381\LPR381-Linear_Programming_Calculator_App\LP_Algorythms_App\LP_Algorythms_App\obj\Debug\LP_Algorythms_App.csproj.AssemblyReference.cache
+C:\Belgium Campus\3rd year\LPR381\LPR381-Linear_Programming_Calculator_App\LP_Algorythms_App\LP_Algorythms_App\obj\Debug\LP_Algorythms_App.Form1.resources
+C:\Belgium Campus\3rd year\LPR381\LPR381-Linear_Programming_Calculator_App\LP_Algorythms_App\LP_Algorythms_App\obj\Debug\LP_Algorythms_App.Properties.Resources.resources
+C:\Belgium Campus\3rd year\LPR381\LPR381-Linear_Programming_Calculator_App\LP_Algorythms_App\LP_Algorythms_App\obj\Debug\LP_Algorythms_App.csproj.GenerateResource.cache
+C:\Belgium Campus\3rd year\LPR381\LPR381-Linear_Programming_Calculator_App\LP_Algorythms_App\LP_Algorythms_App\obj\Debug\LP_Algorythms_App.csproj.CoreCompileInputs.cache
+C:\Belgium Campus\3rd year\LPR381\LPR381-Linear_Programming_Calculator_App\LP_Algorythms_App\LP_Algorythms_App\obj\Debug\LP_Algorythms_App.exe
+C:\Belgium Campus\3rd year\LPR381\LPR381-Linear_Programming_Calculator_App\LP_Algorythms_App\LP_Algorythms_App\obj\Debug\LP_Algorythms_App.pdb
+C:\Belgium Campus\3rd year\LPR381\LPR381-Linear_Programming_Calculator_App\LP_Algorythms_App\LP_Algorythms_App\bin\Debug\LP_Algorythms_App.exe.config
+C:\Belgium Campus\3rd year\LPR381\LPR381-Linear_Programming_Calculator_App\LP_Algorythms_App\LP_Algorythms_App\bin\Debug\LP_Algorythms_App.exe
+C:\Belgium Campus\3rd year\LPR381\LPR381-Linear_Programming_Calculator_App\LP_Algorythms_App\LP_Algorythms_App\bin\Debug\LP_Algorythms_App.pdb

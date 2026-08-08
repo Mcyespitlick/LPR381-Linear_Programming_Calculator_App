@@ -31,6 +31,7 @@
             this.dgvTable = new System.Windows.Forms.DataGridView();
             this.btnExit = new System.Windows.Forms.Button();
             this.btnLoadData = new System.Windows.Forms.Button();
+            this.btnStandard = new System.Windows.Forms.Button();
             this.btnCanonical = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTable)).BeginInit();
             this.SuspendLayout();
@@ -63,15 +64,25 @@
             this.btnLoadData.UseVisualStyleBackColor = true;
             this.btnLoadData.Click += new System.EventHandler(this.btnLoadData_Click);
             // 
+            // btnStandard
+            // 
+            this.btnStandard.Location = new System.Drawing.Point(13, 141);
+            this.btnStandard.Name = "btnStandard";
+            this.btnStandard.Size = new System.Drawing.Size(186, 23);
+            this.btnStandard.TabIndex = 3;
+            this.btnStandard.Text = "Standard Form";
+            this.btnStandard.UseVisualStyleBackColor = true;
+            this.btnStandard.Click += new System.EventHandler(this.btnCanonical_Click);
+            // 
             // btnCanonical
             // 
-            this.btnCanonical.Location = new System.Drawing.Point(13, 106);
+            this.btnCanonical.Location = new System.Drawing.Point(13, 89);
             this.btnCanonical.Name = "btnCanonical";
             this.btnCanonical.Size = new System.Drawing.Size(186, 23);
-            this.btnCanonical.TabIndex = 3;
-            this.btnCanonical.Text = "Canoical Form";
+            this.btnCanonical.TabIndex = 4;
+            this.btnCanonical.Text = "To canonical";
             this.btnCanonical.UseVisualStyleBackColor = true;
-            this.btnCanonical.Click += new System.EventHandler(this.btnCanonical_Click);
+            this.btnCanonical.Click += new System.EventHandler(this.btnCanonical_Click_1);
             // 
             // Form1
             // 
@@ -79,6 +90,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1397, 450);
             this.Controls.Add(this.btnCanonical);
+            this.Controls.Add(this.btnStandard);
             this.Controls.Add(this.btnLoadData);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.dgvTable);
@@ -94,6 +106,7 @@
         private System.Windows.Forms.DataGridView dgvTable;
         private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.Button btnLoadData;
+        private System.Windows.Forms.Button btnStandard;
         private System.Windows.Forms.Button btnCanonical;
     }
 }

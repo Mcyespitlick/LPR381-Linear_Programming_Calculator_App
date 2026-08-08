@@ -47,7 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Business Layer\DataConversion.cs" />
-    <Compile Include="Business Layer\DataLoader.cs" />
+    <Compile Include="Business Layer\DataHandler.cs" />
     <Compile Include="Business Layer\Model.cs" />
     <Compile Include="Presentation Layer\Form1.cs">
       <SubType>Form</SubType>

@@ -13,11 +13,13 @@ namespace LP_Algorythms_App
 {
     public partial class Form1 : Form
     {
-        DataLoader logic = new DataLoader();
+        DataHandler handler = new DataHandler();
         DataConversion conversion = new DataConversion();
         String[][] data = null;
         ParsedModel parsedModel = null;
-        
+        ParsedModel CanonicalModel = null;
+        StandardModel standardModel = null;
+
         public Form1()
         {
             InitializeComponent();
@@ -36,10 +38,10 @@ namespace LP_Algorythms_App
                 data = null;
                 string filePath = openFileDialog.FileName;
                 Console.WriteLine(filePath );
-                logic.LoadData(filePath,out data);
+                handler.LoadData(filePath,out data);
                 Console.WriteLine(data.Length);
 
-                logic.RawToGrid(dgvTable, data);
+                handler.RawToGrid(dgvTable, data); //the raw data is in canonical form, as this is how it was input. might still need to be parsed.
             }
         }
 
@@ -53,16 +55,50 @@ namespace LP_Algorythms_App
         //================================================================================================//
         private void btnCanonical_Click(object sender, EventArgs e)
         {
-            if (!data.Any() || data == null) { 
-                Console.WriteLine("no data to convert"); 
+            if (!data.Any() || data == null)
+            {
+                Console.WriteLine("no data to convert");
             }
             else
             {
-                if(conversion.ParseModel(data, out parsedModel))
+                if (conversion.ToCanonical(data, out parsedModel))
                 {
                     Console.WriteLine("Successfully parsed");
 
-                    //still needs to convert then add the canonical form
+                    if (conversion.ToStandard(parsedModel, out standardModel))
+                    {
+                        Console.WriteLine("Successfully Converted to StandardModel");
+                        handler.StandardToGrid(dgvTable, standardModel, parsedModel);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Failed to convert to standardModel");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Failed to parse");
+                }
+            }
+        }
+
+        //================================================================================================//
+        private void btnStandard_Click(object sender, EventArgs e)
+        {
+
+        }
+        //================================================================================================//
+        private void btnCanonical_Click_1(object sender, EventArgs e)
+        {
+            if (!data.Any() || data == null)
+            {
+                Console.WriteLine("no data to convert");
+            }
+            else
+            {
+                if (conversion.ToCanonical(data, out parsedModel))
+                {
+                    Console.WriteLine("Successfully parsed");
                 }
                 else
                 {
