@@ -145,7 +145,7 @@ namespace LP_Algorythms_App.Business_Layer
 
                     }else if (j == firstrow)
                     {
-                        table.Rows[i + 2].Cells[j].Value = standardModel.Constraints[i].Relation;
+                        table.Rows[i + 2].Cells[j].Value = "=";
                     }
                     else
                     {
