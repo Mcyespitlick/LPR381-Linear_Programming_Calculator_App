@@ -53,7 +53,7 @@ namespace LP_Algorythms_App
 
 
         //================================================================================================//
-        private void btnCanonical_Click(object sender, EventArgs e)
+        private void btnCanonical_Click(object sender, EventArgs e) //to Standard
         {
             if (!data.Any() || data == null)
             {
@@ -88,7 +88,7 @@ namespace LP_Algorythms_App
 
         }
         //================================================================================================//
-        private void btnCanonical_Click_1(object sender, EventArgs e)
+        private void btnCanonical_Click_1(object sender, EventArgs e) // to canonical
         {
             if (!data.Any() || data == null)
             {

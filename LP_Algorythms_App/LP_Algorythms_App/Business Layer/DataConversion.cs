@@ -88,6 +88,7 @@ namespace LP_Algorythms_App.Business_Layer
 
             try
             {
+
                 //this checks where the sign constraints are scanned for URS and '-', as these will require further transormations in their column
                 //-----------------------------
                 
@@ -111,6 +112,8 @@ namespace LP_Algorythms_App.Business_Layer
                 //----------------------------
 
                 StandardModel standardModel = new StandardModel();
+
+                standardModel.ObjectiveType = model.ObjectiveType; //just reads in the Objective type
 
                 for (int i = 0; i < NumberOfConstraints; i++)
                 {
@@ -138,13 +141,13 @@ namespace LP_Algorythms_App.Business_Layer
                     
                             if (negativeSign.Contains(i))
                         {
-                            standardModel.ObjectiveCoefficients[i + ExtraColumn] = -(model.ObjectiveCoefficients[i]);
+                            standardModel.ObjectiveCoefficients[i + ExtraColumn] = (model.ObjectiveCoefficients[i]);
                             VariableNames[i + ExtraColumn] = "x" + (i + 1) + "'";
                         }
                         else if (ursSign.Contains(i))
                         {
-                            standardModel.ObjectiveCoefficients[i + ExtraColumn] = (model.ObjectiveCoefficients[i]);
-                            standardModel.ObjectiveCoefficients[i + ExtraColumn + 1] = -(model.ObjectiveCoefficients[i]);
+                            standardModel.ObjectiveCoefficients[i + ExtraColumn] = -(model.ObjectiveCoefficients[i]);
+                            standardModel.ObjectiveCoefficients[i + ExtraColumn + 1] = (model.ObjectiveCoefficients[i]);
 
                             VariableNames[i + ExtraColumn] = "x" + (i + 1);
                             VariableNames[i + ExtraColumn + 1] = "x" + (i + 1) + "'";
@@ -153,7 +156,7 @@ namespace LP_Algorythms_App.Business_Layer
                         }
                             else
                         {
-                            standardModel.ObjectiveCoefficients[i + ExtraColumn] = (model.ObjectiveCoefficients[i]);
+                            standardModel.ObjectiveCoefficients[i + ExtraColumn] = -(model.ObjectiveCoefficients[i]);
                             VariableNames[i + ExtraColumn] = "x" + (i + 1);
                         }
 
