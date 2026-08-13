@@ -1,0 +1,44 @@
+4 algorythms will be required:
+	1. Primal Simplex
+	2. Revised Primal Simplex
+	3. Dual Simplex
+	4. Knapsack
+
+6 methods needs to be done:
+	1.Primal Simplex - Primal simplex
+	2.Revised primal - Revised Primal simplex
+	3.Branch and bound Simplex - Pimal + Dual + branching
+	4.Cutting plane	- Primal + Dual + cutting
+	5.Kanpsack - B&B Knapsack
+
+//===================================================================//
+
+
+
+/==========/
+Workflows:
+/==========/
+
+
+
+3.for just B&B primal, do following steps:
+	1. check to see if all RHS values are positive.
+	2. if not, do dual simplex. if its all positive, skip to step 3
+	3. do Primal simplex to get optimal table
+	4. branch the table
+	5. use dual simplex to get optimal table
+	6. return to step 4 as required (if more branching is required)
+
+4.for cutting plane, do the following:
+	1. check to see if all RHS values are positive.
+	2. if not, do dual simplex. if its all positive, skip to step 3
+	3. do Primal simplex to get optimal table
+	4. Cut table
+	5. use dual simplex to get optimal table
+	6. return to step 4 as required (if more cutting is required)
+
+
+
+
+
+

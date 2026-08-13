@@ -70,6 +70,7 @@ namespace LP_Algorythms_App.Business_Layer
             table.RowCount = model.Length+1;
             table.ColumnCount = model[1].Length+2;
             int firstrow = model[0].Length;
+            table.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
 
 
             //reads in the headers
@@ -109,8 +110,9 @@ namespace LP_Algorythms_App.Business_Layer
             table.Rows.Clear();
 
             table.RowCount = standardModel.Constraints.Count + 2;
-            table.ColumnCount = standardModel.Constraints[0].Coefficients.Length + 3;
-            int firstrow = standardModel.ObjectiveCoefficients.Length;
+            table.ColumnCount = standardModel.Constraints[0].Coefficients.Count + 3;
+            int firstrow = standardModel.ObjectiveCoefficients.Count;
+            table.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
 
             int ursCounter = 0;
 
@@ -121,7 +123,7 @@ namespace LP_Algorythms_App.Business_Layer
             }
 
 
-            firstrow = standardModel.ObjectiveCoefficients.Length;
+            firstrow = standardModel.ObjectiveCoefficients.Count;
             ursCounter = 0;
             //reads the objective function into the table
             for (int i = 0; i < firstrow; i++)
@@ -132,7 +134,7 @@ namespace LP_Algorythms_App.Business_Layer
             }
 
 
-            firstrow = standardModel.ObjectiveCoefficients.Length;
+            firstrow = standardModel.ObjectiveCoefficients.Count;
             ursCounter = 0;
             //reads constraints into table
             for (int i = 0; i < standardModel.Constraints.Count; i++)

@@ -25,11 +25,11 @@ namespace LP_Algorythms_App.Business_Layer
                 NewModel.ObjectiveType = FirstLine[0];         //check the first entry for if its min or max
 
                 int ObjectiveFunctionLength = FirstLine[0].Length - 1;
-                NewModel.ObjectiveCoefficients = new double[FirstLine.Length - 1];
+                NewModel.ObjectiveCoefficients = new List<Double>();
 
                 for (int i = 0; i < (FirstLine.Length -1); i++)
                 {
-                    NewModel.ObjectiveCoefficients[i] = double.Parse(FirstLine[i + 1]);
+                    NewModel.ObjectiveCoefficients.Add(double.Parse(FirstLine[i + 1]));
                 }
 
                  
@@ -42,11 +42,11 @@ namespace LP_Algorythms_App.Business_Layer
 
                     Constraint constraint = new Constraint();                   //create the array the will hold the coeficient.
 
-                    constraint.Coefficients = new double[FirstLine.Length - 1]; //needs to be here in order for the array size to be set.
+                    constraint.Coefficients = new List<double>();
 
                     for (int j = 0; j < FirstLine.Length - 1; j++)
                     {
-                        constraint.Coefficients[j] = double.Parse(line[j]);
+                        constraint.Coefficients.Add(double.Parse(line[j]));
                     }
 
                     constraint.Relation = line[FirstLine.Length - 1];
@@ -59,7 +59,12 @@ namespace LP_Algorythms_App.Business_Layer
 
                 // add the sign restrictions
                 String[] LastLine = RawData[RawData.Length-1];
-                NewModel.SignRestrictions = LastLine;
+                NewModel.SignRestrictions = new List<String>();
+
+                for (int i = 0; i < (LastLine.Length); i++)
+                {
+                    NewModel.SignRestrictions.Add(LastLine[i]);
+                }
 
                 model = NewModel;
                 return true;
@@ -83,7 +88,8 @@ namespace LP_Algorythms_App.Business_Layer
         {
             NewModel = null;
             int NumberOfConstraints = model.Constraints.Count;
-            int NumberOfColumns = model.ObjectiveCoefficients.Length;
+            int NumberOfColumns = model.ObjectiveCoefficients.Count;
+            
 
 
             try
@@ -94,8 +100,9 @@ namespace LP_Algorythms_App.Business_Layer
                 
                 List<int> negativeSign = new List<int>();
                 List<int> ursSign = new List<int>();
+                List<String> SignRestrictions = new List<String>();
 
-                for (int i = 0; i < model.SignRestrictions.Length; i++)
+                for (int i = 0; i < model.SignRestrictions.Count; i++)
                 {
                     if (model.SignRestrictions[i] == "-")
                     {
@@ -129,37 +136,61 @@ namespace LP_Algorythms_App.Business_Layer
                     }
                 }
 
-                String[] VariableNames = new string[NumberOfColumns];
+                List<String> VariableNames = new List<String>();
 
-                standardModel.ObjectiveCoefficients = new double[NumberOfColumns];
+                standardModel.ObjectiveCoefficients = new List<Double>();
 
                 //reads in the values of the objective function (Z row), with a bunch of zeros in the new columns
 
+
+                standardModel.SignRestrictions = new List<String>();
+
                 int ExtraColumn = 0;
-                for (int i = 0; i < model.ObjectiveCoefficients.Length; i++)
+                for (int i = 0; i < model.ObjectiveCoefficients.Count; i++)
                 {
-                    
-                            if (negativeSign.Contains(i))
-                        {
-                            standardModel.ObjectiveCoefficients[i + ExtraColumn] = (model.ObjectiveCoefficients[i]);
-                            VariableNames[i + ExtraColumn] = "x" + (i + 1) + "'";
-                        }
-                        else if (ursSign.Contains(i))
-                        {
-                            standardModel.ObjectiveCoefficients[i + ExtraColumn] = -(model.ObjectiveCoefficients[i]);
-                            standardModel.ObjectiveCoefficients[i + ExtraColumn + 1] = (model.ObjectiveCoefficients[i]);
+                    if (negativeSign.Contains(i))
+                    {
+                        standardModel.ObjectiveCoefficients.Add(model.ObjectiveCoefficients[i]);
+                        VariableNames.Add("x" + (i + 1) + "'");
+                        standardModel.SignRestrictions.Add("none");
+                    }
+                    else if (ursSign.Contains(i))
+                    {
+                        standardModel.ObjectiveCoefficients.Add(-(model.ObjectiveCoefficients[i]));
+                        standardModel.ObjectiveCoefficients.Add(model.ObjectiveCoefficients[i]);
 
-                            VariableNames[i + ExtraColumn] = "x" + (i + 1);
-                            VariableNames[i + ExtraColumn + 1] = "x" + (i + 1) + "'";
+                        VariableNames.Add("x" + (i + 1));
+                        VariableNames.Add("x" + (i + 1) + "'");
 
-                            ExtraColumn++;
-                        }
-                            else
-                        {
-                            standardModel.ObjectiveCoefficients[i + ExtraColumn] = -(model.ObjectiveCoefficients[i]);
-                            VariableNames[i + ExtraColumn] = "x" + (i + 1);
-                        }
+                        standardModel.SignRestrictions.Add("none");
+                        standardModel.SignRestrictions.Add("none");
 
+                        ExtraColumn++;
+                    }
+                    else
+                    {
+                        standardModel.ObjectiveCoefficients.Add(-(model.ObjectiveCoefficients[i]));
+                        VariableNames.Add("x" + (i + 1));
+
+                        if (model.SignRestrictions[i] == "bin")
+                            standardModel.SignRestrictions.Add("bin");
+                        else if (model.SignRestrictions[i] == "int")
+                            standardModel.SignRestrictions.Add("int");
+                        else
+                            standardModel.SignRestrictions.Add("invalid");
+                    }
+                }
+
+                //objective fucntion will never have values in the slack, excess and artificial values. so itt just fills it with zeros.
+                while (standardModel.ObjectiveCoefficients.Count < NumberOfColumns)
+                {
+                    standardModel.ObjectiveCoefficients.Add(0);
+                }
+
+                //this just fills the slack, excess and artificial columns. these values are ALWAYS >=0 , so they will always turn to "None".
+                while (standardModel.SignRestrictions.Count < NumberOfColumns)
+                {
+                    standardModel.SignRestrictions.Add("none");
                 }
 
 
@@ -169,74 +200,104 @@ namespace LP_Algorythms_App.Business_Layer
 
                 standardModel.Constraints = new List<Constraint>();
 
+
                 // here the constraints are actually added
                 for (int i = 0; i< NumberOfConstraints; i++)
                 {
                     Constraint constraint = new Constraint();
-                    constraint.Coefficients = new double[NumberOfColumns];
+                    constraint.Coefficients = new List<Double>();
                     ExtraColumn = 0;
 
                     if (model.Constraints[i].Relation == "<=" || model.Constraints[i].Relation == "=")
                     {
 
-                        for (int j = 0; j < model.Constraints[i].Coefficients.Length; j++)
+                        for (int j = 0; j < model.Constraints[i].Coefficients.Count; j++)
                         {
                             if (negativeSign.Contains(j))
                             {
-                                constraint.Coefficients[j+ExtraColumn] = -(model.Constraints[i].Coefficients[j]);
-                            }else if (ursSign.Contains(j))
-                            {
-                                constraint.Coefficients[j + ExtraColumn] = (model.Constraints[i].Coefficients[j]);
-                                constraint.Coefficients[j + ExtraColumn +1] = -(model.Constraints[i].Coefficients[j]);
-                                ExtraColumn++;
-                            }
-                            else
-                            {
-                                constraint.Coefficients[j + ExtraColumn] = (model.Constraints[i].Coefficients[j]);
-                            }
-
-                        }
-                        constraint.RHS = model.Constraints[i].RHS;
-                        constraint.Relation = model.Constraints[i].Relation;
-
-                        constraint.Coefficients[model.Constraints[i].Coefficients.Length + Zeros + ExtraColumn] = 1;
-                        VariableNames[model.Constraints[i].Coefficients.Length + Zeros + ExtraColumn] = (model.Constraints[i].Relation == "<=") ? "s" + (i + 1) : "a" + (i + 1);
-                        Zeros++;
-                        standardModel.Constraints.Add(constraint);
-                        }
-
-                    if (model.Constraints[i].Relation == ">=")
-                    {
-                        for (int j = 0; j < model.Constraints[i].Coefficients.Length; j++)
-                        {
-                            if (negativeSign.Contains(j))
-                            {
-                                constraint.Coefficients[j + ExtraColumn] = -(model.Constraints[i].Coefficients[j]);
+                                constraint.Coefficients.Add(-(model.Constraints[i].Coefficients[j]));
                             }
                             else if (ursSign.Contains(j))
                             {
-                                constraint.Coefficients[j + ExtraColumn] = (model.Constraints[i].Coefficients[j]);
-                                constraint.Coefficients[j + ExtraColumn+1] = -(model.Constraints[i].Coefficients[j]);
+                                constraint.Coefficients.Add((model.Constraints[i].Coefficients[j]));
+                                constraint.Coefficients.Add(-(model.Constraints[i].Coefficients[j]));
                                 ExtraColumn++;
                             }
                             else
                             {
-                                constraint.Coefficients[j + ExtraColumn] = (model.Constraints[i].Coefficients[j]);
+                                constraint.Coefficients.Add(model.Constraints[i].Coefficients[j]);
+                                
                             }
+
                         }
+                        for(int k = 0; k<Zeros; k++)
+                        {
+                            constraint.Coefficients.Add(0);
+                        }
+
                         constraint.RHS = model.Constraints[i].RHS;
                         constraint.Relation = model.Constraints[i].Relation;
 
+                        for (int k = 0; k < standardModel.Constraints.Count; k++)
+                        {
+                            standardModel.Constraints[k].Coefficients.Add(0);
+                        }
 
-                        //this will first add the negative e value, then the positive a value.
-                        constraint.Coefficients[model.Constraints[i].Coefficients.Length + Zeros + ExtraColumn] = -1;
-                        VariableNames[model.Constraints[i].Coefficients.Length + Zeros + ExtraColumn] = "e" + (i + 1);
+                        constraint.Coefficients.Add(1);
+                        VariableNames.Add((model.Constraints[i].Relation == "<=") ? "s" + (i + 1) : "a" + (i + 1));
                         Zeros++;
-                        constraint.Coefficients[model.Constraints[i].Coefficients.Length + Zeros + ExtraColumn] = 1;
-                        VariableNames[model.Constraints[i].Coefficients.Length + Zeros + ExtraColumn] = "a" + (i + 1);
+                        standardModel.Constraints.Add(constraint);
+                    }
+
+                    if (model.Constraints[i].Relation == ">=")
+                    {
+                        for (int j = 0; j < model.Constraints[i].Coefficients.Count; j++)
+                        {
+                            if (negativeSign.Contains(j))
+                            {
+                                constraint.Coefficients.Add(-(model.Constraints[i].Coefficients[j]));
+                            }
+                            else if (ursSign.Contains(j))
+                            {
+                                constraint.Coefficients.Add(model.Constraints[i].Coefficients[j]);
+                                constraint.Coefficients.Add(-(model.Constraints[i].Coefficients[j]));
+                                ExtraColumn++;
+                            }
+                            else
+                            {
+                                constraint.Coefficients.Add(model.Constraints[i].Coefficients[j]);
+                            }
+                        }
+
+                        for (int k = 0; k < Zeros; k++)
+                        {
+                            constraint.Coefficients.Add(0);
+                        }
+
+                        constraint.RHS = model.Constraints[i].RHS;
+                        constraint.Relation = model.Constraints[i].Relation;
+
+                        for (int k = 0; k < standardModel.Constraints.Count; k++)
+                        {
+                            standardModel.Constraints[k].Coefficients.Add(0);
+                        }
+
+                        constraint.Coefficients.Add(-1);
+                        VariableNames.Add("e" + (i + 1));
+                        Zeros++;
+
+                        for (int k = 0; k < standardModel.Constraints.Count; k++)
+                        {
+                            standardModel.Constraints[k].Coefficients.Add(0);
+                        }
+
+                        constraint.Coefficients.Add(1);
+                        VariableNames.Add("a" + (i + 1));
                         Zeros++;
 
                         standardModel.Constraints.Add(constraint);
+
+
                     }
                 }
 

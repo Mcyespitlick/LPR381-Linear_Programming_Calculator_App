@@ -12,22 +12,23 @@ namespace LP_Algorythms_App.Business_Layer
     public class ParsedModel 
     {
         public string ObjectiveType;                // WHich type of objective, such as "max" or "min"
-        public double[] ObjectiveCoefficients;      // the values for the objective funtion, such as [2, 3, 3, 5, 2, 4]
+        public List<Double> ObjectiveCoefficients;      // the values for the objective funtion, such as [2, 3, 3, 5, 2, 4]
         public List<Constraint> Constraints;        // Will hold the constraints (makes use of the class below)
-        public string[] SignRestrictions;           // contains the last line. bin = binary, [+] = [x>=0], [-] = [x<=0], [urs] = can be anything (positive, negative, zero)
+        public List<String> SignRestrictions;           // contains the last line. bin = binary, [+] = [x>=0], [-] = [x<=0], [urs] = can be anything (positive, negative, zero)
     }
     public class StandardModel
     {
         public string ObjectiveType;                // WHich type of objective, such as "max" or "min"
-        public double[] ObjectiveCoefficients;      // the values for the objective funtion, such as [2, 3, 3, 5, 2, 4]
+        public List<double> ObjectiveCoefficients;      // the values for the objective funtion, such as [2, 3, 3, 5, 2, 4]
         public List<Constraint> Constraints;        // Will hold the constraints (makes use of the class below)
-        public string[] VariableNames;              // contains the variable names like x1, s2 and e3.
+        public List<String> VariableNames;              // contains the variable names like x1, s2 and e3.
+        public List<String> SignRestrictions;         // should only contain the restrictions "bin", "int", or "none"   //implement this into standard form
     }
 
     //this is only used to make  list in the Model class (above)
     public class Constraint
     {
-        public double[] Coefficients;   // the values such as [11, 8, 6, 14, 10, 10]
+        public List<Double> Coefficients;   // the values such as [11, 8, 6, 14, 10, 10]
         public string Relation;         // the sign such as "<=", ">=", or "="
         public double RHS;              // THe RHS value (will only have 1 value)
     }

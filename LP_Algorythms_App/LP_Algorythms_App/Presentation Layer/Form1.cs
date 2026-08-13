@@ -55,7 +55,7 @@ namespace LP_Algorythms_App
         //================================================================================================//
         private void btnCanonical_Click(object sender, EventArgs e) //to Standard
         {
-            if (!data.Any() || data == null)
+            if (data == null || !data.Any())
             {
                 Console.WriteLine("no data to convert");
             }
@@ -90,7 +90,7 @@ namespace LP_Algorythms_App
         //================================================================================================//
         private void btnCanonical_Click_1(object sender, EventArgs e) // to canonical
         {
-            if (!data.Any() || data == null)
+            if (data == null || !data.Any())
             {
                 Console.WriteLine("no data to convert");
             }
