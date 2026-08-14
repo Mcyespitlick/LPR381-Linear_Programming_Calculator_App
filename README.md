@@ -2,6 +2,22 @@
 A simple application that reads a input file, with the features of being able to calculate several linear programming models. There are also the features to modify the input data on the fly.
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+in-depth explanaitionon how it reads and transforms data is as follows:
+
 it takes the the input in the form of this example:
 
 max +2 +3 +3 +5 +2 +4
@@ -57,10 +73,12 @@ SignRestrictions: "bin"     "urs"     "-"       "bin"     "bin"     "bin"   ---s
 Clicking "to standard" then changes this canonical form into standard form (the one usually usedin linear programming)
 It is sored in a class Called "StandardModel"
 
-x1      x2      x2'    x3'    x4      x5      x6      s1     e2     a2
--2     -3       3      3     -5      -2      -4       0      0      0
-11      8      -8     -6      14      10      10      1      0      0   =   40
-8       5      -5     -12     3       6       10      0      -1     1   =   30
+Max x1      x2      x2'    x3'    x4      x5      x6      s1     e2     a2  
+W   8       5      -5     -12     3       6       10      0      -1     1       30
+Z   -2     -3       3      3     -5      -2      -4       0      0      0
+1   11      8      -8     -6      14      10      10      1      0      0   =   40
+2   8       5      -5     -12     3       6       10      0      -1     1   =   30
+   "bin" "none"  "none" "none"  "bin"   "bin"   "bin"  "none" "none" "none"
 
 Its the split further into this shape
 
@@ -68,17 +86,23 @@ ObjectiveType: "max"    --------------------------------------------------------
 
 VariableNames:  x1      x2      x2'    x3'    x4      x5      x6      s1     e2     a2 --------------------------saved as a String array
 
-ObjectiveCoefficients: -2      -3      3      3      -5      -2      -4      0      0      0   ------------------saved in a Double array (an array that stores Doubles so we can keep the decimals)
+ObjectiveCoefficients: -2      -3      3      3      -5      -2      -4      0      0      0   ------------------saved in a Double List (a list that stores Doubles so we can keep the decimals)
 
 
 
-Constraints[0]: Coefficients: 11      8      -8     -6      14      10      10      1      0      0   -----------The coefficients are stored in a Double array (Array storing doubles)
+Constraints[0]: Coefficients: 11      8      -8     -6      14      10      10      1      0      0   -----------The coefficients are stored in a Double list (list storing doubles)
                 Relation: "<=" -------------------------------------------------Stored as a string
                 RHS: 40 --------------------------------------------------------Stored as a double
 
 
 
 
-Constraints[0]: Coefficients: 8       5      -5     -12     3       6       10      0      -1     1   -----------The coefficients are stored in a Double array (Array storing doubles)
+Constraints[1]: Coefficients: 8       5      -5     -12     3       6       10      0      -1     1   -----------The coefficients are stored in a Double list (list storing doubles)
                 Relation: "<=" -------------------------------------------------Stored as a string
                 RHS: 40 --------------------------------------------------------Stored as a double
+
+
+
+TwoPhaseObjective:  Coefficients: 11      8      -8     -6      14      10      10      1      0      0   -----------The coefficients are stored in a Double list (list storing doubles)
+                    Relation: ""----------------------------------------------------its not needed, so its empty
+                    RHS: 30 --------------------------------------------------------Stored as a double

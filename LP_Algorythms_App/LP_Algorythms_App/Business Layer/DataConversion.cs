@@ -90,8 +90,6 @@ namespace LP_Algorythms_App.Business_Layer
             int NumberOfConstraints = model.Constraints.Count;
             int NumberOfColumns = model.ObjectiveCoefficients.Count;
             
-
-
             try
             {
 
@@ -101,6 +99,8 @@ namespace LP_Algorythms_App.Business_Layer
                 List<int> negativeSign = new List<int>();
                 List<int> ursSign = new List<int>();
                 List<String> SignRestrictions = new List<String>();
+
+
 
                 for (int i = 0; i < model.SignRestrictions.Count; i++)
                 {
@@ -122,9 +122,28 @@ namespace LP_Algorythms_App.Business_Layer
 
                 standardModel.ObjectiveType = model.ObjectiveType; //just reads in the Objective type
 
+                //Checks the constraint's signs and RHS, flips all values and sign if RHS is negative.
+                //then reads the signs to see how many extra columns will be required due to the slacks, excesses and artificial values.
                 for (int i = 0; i < NumberOfConstraints; i++)
                 {
-                    
+                    if (model.Constraints[i].RHS < 0)
+                    {
+                        for (int j = 0; j < model.Constraints[i].Coefficients.Count; j++)
+                        {
+                            model.Constraints[i].Coefficients[j] = -model.Constraints[i].Coefficients[j];
+                        }
+                        model.Constraints[i].RHS = -model.Constraints[i].RHS;
+
+                        if (model.Constraints[i].Relation == ">=")
+                        {
+                            model.Constraints[i].Relation = "<=";
+                        } else 
+                        if (model.Constraints[i].Relation == "<=")
+                        {
+                            model.Constraints[i].Relation = ">=";
+                        }
+                    }
+
                     if (model.Constraints[i].Relation == "<=" || model.Constraints[i].Relation == "=")
                     {
                         NumberOfColumns++;
@@ -200,7 +219,7 @@ namespace LP_Algorythms_App.Business_Layer
 
                 standardModel.Constraints = new List<Constraint>();
 
-
+                #region Adding of constraints
                 // here the constraints are actually added
                 for (int i = 0; i< NumberOfConstraints; i++)
                 {
@@ -208,9 +227,11 @@ namespace LP_Algorythms_App.Business_Layer
                     constraint.Coefficients = new List<Double>();
                     ExtraColumn = 0;
 
+
+
                     if (model.Constraints[i].Relation == "<=" || model.Constraints[i].Relation == "=")
                     {
-
+                          
                         for (int j = 0; j < model.Constraints[i].Coefficients.Count; j++)
                         {
                             if (negativeSign.Contains(j))
@@ -300,6 +321,49 @@ namespace LP_Algorythms_App.Business_Layer
 
                     }
                 }
+                #endregion
+
+                #region creation of new objective (W row) if required)
+                //this will check if there are any artifcial values. if so, will add an extra objective row.
+
+
+
+                Constraint NewOBJ = new Constraint();
+                NewOBJ.Coefficients = new List<double>();
+                bool YesObjective = false;
+
+                for (int k = 0; k < VariableNames.Count; k++)
+                {
+                    NewOBJ.Coefficients.Add(0);
+                }
+
+                for (int i=0; i< VariableNames.Count; i++)
+                {
+                    if (VariableNames[i].StartsWith("a"))
+                    {
+                        string numberPart = VariableNames[i].Substring(1); // should delete the "a" and put the rest in a string.
+                        int constraintIndex = int.Parse(numberPart);       // "11" -> 11 as an int
+
+                        for(int j = 0; j < VariableNames.Count; j++)
+                        {
+                            if (!VariableNames[j].StartsWith("a"))
+                            {
+                                NewOBJ.Coefficients[j] += standardModel.Constraints[constraintIndex - 1].Coefficients[j];
+                                
+                            }
+                        }
+                        NewOBJ.RHS += standardModel.Constraints[constraintIndex - 1].RHS;
+                        YesObjective = true;
+                    }
+                }
+
+                if (YesObjective)
+                {
+                    standardModel.TwoPhaseObjective = NewOBJ;
+                }
+                #endregion
+
+
 
                 standardModel.VariableNames = VariableNames;
                 NewModel = standardModel;
@@ -312,6 +376,5 @@ namespace LP_Algorythms_App.Business_Layer
             }
         }
         #endregion
-
     }
 }

@@ -79,6 +79,8 @@ namespace LP_Algorythms_App.Business_Layer
                 table.Rows[0].Cells[i].Value = ("x"+i);
             }
 
+
+
             //reads the objective function into the table
             for (int i = 0; i < firstrow; i++)
             {
@@ -104,31 +106,55 @@ namespace LP_Algorythms_App.Business_Layer
 
         #endregion
 
-        public void StandardToGrid(DataGridView table, StandardModel standardModel, ParsedModel parsedModel)
+        public void StandardToGrid(DataGridView table, StandardModel standardModel, ParsedModel parsedModel) //see if you can drop the last variable (Parsed Model). it does nothing
         {
             table.Columns.Clear();
             table.Rows.Clear();
 
-            table.RowCount = standardModel.Constraints.Count + 2;
+            table.RowCount = standardModel.Constraints.Count + 4;
             table.ColumnCount = standardModel.Constraints[0].Coefficients.Count + 3;
             int firstrow = standardModel.ObjectiveCoefficients.Count;
             table.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+
+            table.Rows[0].Cells[0].Value = standardModel.ObjectiveType.ToString();
+
+            table.Rows[0].Cells[table.ColumnCount - 2].Value = "Sign";
+            table.Rows[0].Cells[table.ColumnCount - 1].Value = "RHS";
 
             int ursCounter = 0;
 
             //reads in the headers
             for (int i = 0; i < firstrow; i++)
             {
-                table.Rows[0].Cells[i].Value = standardModel.VariableNames[i];
+                table.Rows[0].Cells[i + 1].Value = standardModel.VariableNames[i];
             }
+
+            bool TwoPhase = false;
+            int ExtraRow = 0;
+
+            if(standardModel.TwoPhaseObjective !=  null)
+            {
+                table.Rows[1].Cells[0].Value = "W";
+                int columns = 0;
+                ExtraRow = 1;
+                for (int i = 0; i < firstrow; i++)
+                {
+                    table.Rows[1].Cells[i + 1].Value = standardModel.TwoPhaseObjective.Coefficients[i];
+                    columns ++;
+                }
+                columns++;
+                table.Rows[1].Cells[columns + 1].Value = standardModel.TwoPhaseObjective.RHS;
+            }
+            
 
 
             firstrow = standardModel.ObjectiveCoefficients.Count;
             ursCounter = 0;
             //reads the objective function into the table
+            table.Rows[1+ExtraRow].Cells[0].Value = "Z";
             for (int i = 0; i < firstrow; i++)
             {
-                table.Rows[1].Cells[i ].Value = standardModel.ObjectiveCoefficients[i];
+                table.Rows[1+ ExtraRow].Cells[i + 1].Value = standardModel.ObjectiveCoefficients[i];
 
 
             }
@@ -139,23 +165,25 @@ namespace LP_Algorythms_App.Business_Layer
             //reads constraints into table
             for (int i = 0; i < standardModel.Constraints.Count; i++)
             {
+                table.Rows[i + 2 + ExtraRow].Cells[0].Value = "Constraint"+(i + 1);
                 for (int j = 0; j < firstrow + 2; j++)
                 {
                     if (j<firstrow)
                     {
-                        table.Rows[i + 2].Cells[j].Value = standardModel.Constraints[i].Coefficients[j];
+                        table.Rows[i + 2 + ExtraRow].Cells[j + 1].Value = standardModel.Constraints[i].Coefficients[j];
 
                     }else if (j == firstrow)
                     {
-                        table.Rows[i + 2].Cells[j].Value = "=";
+                        table.Rows[i + 2 + ExtraRow].Cells[j + 1].Value = "=";
                     }
                     else
                     {
-                        table.Rows[i + 2].Cells[j].Value = standardModel.Constraints[i].RHS;
+                        table.Rows[i + 2 + ExtraRow].Cells[j + 1].Value = standardModel.Constraints[i].RHS;
                     }
-
                 }
             }
+
+
         }
     }
 }

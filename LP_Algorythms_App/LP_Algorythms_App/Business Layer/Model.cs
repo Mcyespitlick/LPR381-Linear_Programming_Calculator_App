@@ -23,6 +23,7 @@ namespace LP_Algorythms_App.Business_Layer
         public List<Constraint> Constraints;        // Will hold the constraints (makes use of the class below)
         public List<String> VariableNames;              // contains the variable names like x1, s2 and e3.
         public List<String> SignRestrictions;         // should only contain the restrictions "bin", "int", or "none"   //implement this into standard form
+        public Constraint TwoPhaseObjective;
     }
 
     //this is only used to make  list in the Model class (above)
