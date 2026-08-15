@@ -15,10 +15,13 @@ namespace LP_Algorythms_App
     {
         DataHandler handler = new DataHandler();
         DataConversion conversion = new DataConversion();
+        Reused_Algorythms reused_Algorythms = new Reused_Algorythms();
         String[][] data = null;
         ParsedModel parsedModel = null;
         ParsedModel CanonicalModel = null;
         StandardModel standardModel = null;
+
+        ResolvedModel TwoPhasedResolved = null;
 
         public Form1()
         {
@@ -104,6 +107,18 @@ namespace LP_Algorythms_App
                 {
                     Console.WriteLine("Failed to parse");
                 }
+            }
+        }
+
+        private void TwoPhase_Click(object sender, EventArgs e)
+        {
+
+            if (reused_Algorythms.TwoPhase(standardModel, out TwoPhasedResolved))
+            {
+                Console.WriteLine("Two-Phased successfully converted");
+            } else
+            {
+                Console.WriteLine("Two-Phase failed");
             }
         }
         //================================================================================================//

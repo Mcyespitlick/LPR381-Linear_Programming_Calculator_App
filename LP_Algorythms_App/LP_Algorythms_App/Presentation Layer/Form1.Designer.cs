@@ -33,6 +33,7 @@
             this.btnLoadData = new System.Windows.Forms.Button();
             this.btnStandard = new System.Windows.Forms.Button();
             this.btnCanonical = new System.Windows.Forms.Button();
+            this.TwoPhase = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTable)).BeginInit();
             this.SuspendLayout();
             // 
@@ -84,11 +85,22 @@
             this.btnCanonical.UseVisualStyleBackColor = true;
             this.btnCanonical.Click += new System.EventHandler(this.btnCanonical_Click_1);
             // 
+            // TwoPhase
+            // 
+            this.TwoPhase.Location = new System.Drawing.Point(12, 170);
+            this.TwoPhase.Name = "TwoPhase";
+            this.TwoPhase.Size = new System.Drawing.Size(187, 23);
+            this.TwoPhase.TabIndex = 5;
+            this.TwoPhase.Text = "Two-Phase";
+            this.TwoPhase.UseVisualStyleBackColor = true;
+            this.TwoPhase.Click += new System.EventHandler(this.TwoPhase_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1397, 450);
+            this.Controls.Add(this.TwoPhase);
             this.Controls.Add(this.btnCanonical);
             this.Controls.Add(this.btnStandard);
             this.Controls.Add(this.btnLoadData);
@@ -108,6 +120,7 @@
         private System.Windows.Forms.Button btnLoadData;
         private System.Windows.Forms.Button btnStandard;
         private System.Windows.Forms.Button btnCanonical;
+        private System.Windows.Forms.Button TwoPhase;
     }
 }
 

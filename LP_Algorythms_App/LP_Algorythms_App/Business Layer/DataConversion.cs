@@ -195,6 +195,8 @@ namespace LP_Algorythms_App.Business_Layer
                             standardModel.SignRestrictions.Add("bin");
                         else if (model.SignRestrictions[i] == "int")
                             standardModel.SignRestrictions.Add("int");
+                        else if (model.SignRestrictions[i] == "+")
+                            standardModel.SignRestrictions.Add("none");
                         else
                             standardModel.SignRestrictions.Add("invalid");
                     }
@@ -362,7 +364,7 @@ namespace LP_Algorythms_App.Business_Layer
                     standardModel.TwoPhaseObjective = NewOBJ;
                 }
                 #endregion
-
+                standardModel.ObjectiveFunctionRHS = 0;
 
 
                 standardModel.VariableNames = VariableNames;
