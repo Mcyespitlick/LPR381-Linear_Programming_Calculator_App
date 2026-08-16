@@ -28,12 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.dgvTable = new System.Windows.Forms.DataGridView();
             this.btnExit = new System.Windows.Forms.Button();
             this.btnLoadData = new System.Windows.Forms.Button();
             this.btnStandard = new System.Windows.Forms.Button();
             this.btnCanonical = new System.Windows.Forms.Button();
             this.TwoPhase = new System.Windows.Forms.Button();
+            this.PrimalSimplex = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTable)).BeginInit();
             this.SuspendLayout();
             // 
@@ -81,7 +84,7 @@
             this.btnCanonical.Name = "btnCanonical";
             this.btnCanonical.Size = new System.Drawing.Size(186, 23);
             this.btnCanonical.TabIndex = 4;
-            this.btnCanonical.Text = "To canonical";
+            this.btnCanonical.Text = "To canonical (redundant)";
             this.btnCanonical.UseVisualStyleBackColor = true;
             this.btnCanonical.Click += new System.EventHandler(this.btnCanonical_Click_1);
             // 
@@ -95,11 +98,33 @@
             this.TwoPhase.UseVisualStyleBackColor = true;
             this.TwoPhase.Click += new System.EventHandler(this.TwoPhase_Click);
             // 
+            // PrimalSimplex
+            // 
+            this.PrimalSimplex.Location = new System.Drawing.Point(13, 200);
+            this.PrimalSimplex.Name = "PrimalSimplex";
+            this.PrimalSimplex.Size = new System.Drawing.Size(186, 23);
+            this.PrimalSimplex.TabIndex = 6;
+            this.PrimalSimplex.Text = "PrimalSimplex";
+            this.PrimalSimplex.UseVisualStyleBackColor = true;
+            this.PrimalSimplex.Click += new System.EventHandler(this.PrimalSimplex_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(12, 21);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(1157, 13);
+            this.label1.TabIndex = 7;
+            this.label1.Text = resources.GetString("label1.Text");
+            this.label1.Click += new System.EventHandler(this.label1_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1397, 450);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.PrimalSimplex);
             this.Controls.Add(this.TwoPhase);
             this.Controls.Add(this.btnCanonical);
             this.Controls.Add(this.btnStandard);
@@ -110,6 +135,7 @@
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.dgvTable)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -121,6 +147,8 @@
         private System.Windows.Forms.Button btnStandard;
         private System.Windows.Forms.Button btnCanonical;
         private System.Windows.Forms.Button TwoPhase;
+        private System.Windows.Forms.Button PrimalSimplex;
+        private System.Windows.Forms.Label label1;
     }
 }
 

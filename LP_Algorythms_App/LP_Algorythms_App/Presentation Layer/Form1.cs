@@ -19,9 +19,11 @@ namespace LP_Algorythms_App
         String[][] data = null;
         ParsedModel parsedModel = null;
         ParsedModel CanonicalModel = null;
-        StandardModel standardModel = null;
+        StandardModel standardModel = null; //this is the very first tablue, just after converting it.
 
-        ResolvedModel TwoPhasedResolved = null;
+        ResolvedModel TwoPhasedResolved = null; //will have a set of tablues, if two-phase was done
+        ResolvedModel PrimalResolved = null;    //will have a set of tablues if primal simplex was done
+                                                //you will use the very last tablue if you coninue with two-phase.
 
         public Form1()
         {
@@ -119,6 +121,25 @@ namespace LP_Algorythms_App
             } else
             {
                 Console.WriteLine("Two-Phase failed");
+            }
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void PrimalSimplex_Click(object sender, EventArgs e)
+        {
+            //PrimalSimplex(StandardModel initialTable, ResolvedModel TwoPhaseResult, out ResolvedModel PrimalResult)
+
+            if (reused_Algorythms.PrimalSimplex(standardModel, TwoPhasedResolved, out PrimalResolved))
+            {
+                Console.WriteLine("Primal Simplex successfully done");
+            }
+            else
+            {
+                Console.WriteLine("Primal Simplex failed");
             }
         }
         //================================================================================================//

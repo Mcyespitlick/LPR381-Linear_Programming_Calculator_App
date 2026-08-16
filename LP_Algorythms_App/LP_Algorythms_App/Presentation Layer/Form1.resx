@@ -117,4 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="label1.Text" xml:space="preserve">
+    <value>How to work the UI: Click the "Load data from file" button. Then click "StandardForm" in order to convert it. After that, if it has artificial values (columns starting with "a"), click "Two-Phase". After that, click "Primal Simplex" to get the initial tablle. </value>
+  </data>
 </root>

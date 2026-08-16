@@ -38,7 +38,9 @@ namespace LP_Algorythms_App.Business_Layer
 
     public class ResolvedModel
     {
-        public List<StandardModel> tablues;
+        public List<StandardModel> tablues;     //holds multiple versions of standard models.
+                                                //this makes it so that it can save all the intermediary tablues, from start to optimal
+        public String EndResult;
     }
 
 }
