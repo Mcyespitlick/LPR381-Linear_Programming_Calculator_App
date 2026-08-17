@@ -142,6 +142,32 @@ namespace LP_Algorythms_App
                 Console.WriteLine("Primal Simplex failed");
             }
         }
-        //================================================================================================//
+
+        private void btnDualSimplex_Click(object sender, EventArgs e)
+        {
+            ResolvedModel DualResolved;
+            if (standardModel == null)
+            {
+                Console.WriteLine("No standard model available. Click 'To Standard' first.");
+                return;
+            }
+
+            bool ok = reused_Algorythms.DualSimplex(standardModel, TwoPhasedResolved, out DualResolved);
+            if (ok)
+            {
+                Console.WriteLine("Dual Simplex completed: " + (DualResolved.EndResult ?? "result unknown"));
+                if (DualResolved.tablues != null && DualResolved.tablues.Count > 0)
+                {
+                    // reuse existing DataHandler display method (same used elsewhere)
+                    handler.StandardToGrid(dgvTable, DualResolved.tablues.Last(), parsedModel);
+                }
+            }
+            else
+            {
+                Console.WriteLine("Dual Simplex failed.");
+            }
+        }
+
     }
+    //================================================================================================//
 }

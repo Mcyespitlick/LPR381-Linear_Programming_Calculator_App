@@ -37,6 +37,7 @@
             this.TwoPhase = new System.Windows.Forms.Button();
             this.PrimalSimplex = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.btnDualSimplex = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTable)).BeginInit();
             this.SuspendLayout();
             // 
@@ -118,11 +119,22 @@
             this.label1.Text = resources.GetString("label1.Text");
             this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
+            // btnDualSimplex
+            // 
+            this.btnDualSimplex.Location = new System.Drawing.Point(12, 229);
+            this.btnDualSimplex.Name = "btnDualSimplex";
+            this.btnDualSimplex.Size = new System.Drawing.Size(187, 23);
+            this.btnDualSimplex.TabIndex = 8;
+            this.btnDualSimplex.Text = "Dual Simplex";
+            this.btnDualSimplex.UseVisualStyleBackColor = true;
+            this.btnDualSimplex.Click += new System.EventHandler(this.btnDualSimplex_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1397, 450);
+            this.ClientSize = new System.Drawing.Size(1284, 450);
+            this.Controls.Add(this.btnDualSimplex);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.PrimalSimplex);
             this.Controls.Add(this.TwoPhase);
@@ -149,6 +161,7 @@
         private System.Windows.Forms.Button TwoPhase;
         private System.Windows.Forms.Button PrimalSimplex;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button btnDualSimplex;
     }
 }
 
