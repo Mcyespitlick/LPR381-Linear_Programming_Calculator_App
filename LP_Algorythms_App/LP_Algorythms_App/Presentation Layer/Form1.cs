@@ -16,6 +16,8 @@ namespace LP_Algorythms_App
         DataHandler handler = new DataHandler();
         DataConversion conversion = new DataConversion();
         Reused_Algorythms reused_Algorythms = new Reused_Algorythms();
+
+
         String[][] data = null;
         ParsedModel parsedModel = null;
         ParsedModel CanonicalModel = null;
@@ -24,6 +26,8 @@ namespace LP_Algorythms_App
         ResolvedModel TwoPhasedResolved = null; //will have a set of tablues, if two-phase was done
         ResolvedModel PrimalResolved = null;    //will have a set of tablues if primal simplex was done
                                                 //you will use the very last tablue if you coninue with two-phase.
+
+        ResolvedModel DualResolved = null;
 
         public Form1()
         {
@@ -146,13 +150,35 @@ namespace LP_Algorythms_App
         private void btnDualSimplex_Click(object sender, EventArgs e)
         {
             ResolvedModel DualResolved;
+
             if (standardModel == null)
             {
                 Console.WriteLine("No standard model available. Click 'To Standard' first.");
                 return;
             }
 
-            bool ok = reused_Algorythms.DualSimplex(standardModel, TwoPhasedResolved, out DualResolved);
+            /*   this was for testing
+            StandardModel t = new StandardModel();
+            t.ObjectiveType = "max";
+            t.ObjectiveCoefficients = new List<double> { 2, 3, 0, 0 };
+            t.ObjectiveFunctionRHS = 0;
+            t.VariableNames = new List<string> { "x1", "x2", "s1", "s2" };
+            t.SignRestrictions = new List<string> { "none", "none", "none", "none" };
+            t.Constraints = new List<Business_Layer.Constraint>
+{
+            new Business_Layer.Constraint { Coefficients = new List<double> { -1, -1, 1, 0 }, Relation = "<=", RHS = -2 },
+            new Business_Layer.Constraint { Coefficients = new List<double> { -1, -2, 0, 1 }, Relation = "<=", RHS = -3 }
+};
+            ResolvedModel testinput = new ResolvedModel { tablues = new List<StandardModel> { t } };
+
+
+
+            bool ok = reused_Algorythms.DualSimplex2(testinput, out DualResolved);
+            */
+
+
+
+            bool ok = reused_Algorythms.DualSimplex(PrimalResolved, out DualResolved);
             if (ok)
             {
                 Console.WriteLine("Dual Simplex completed: " + (DualResolved.EndResult ?? "result unknown"));

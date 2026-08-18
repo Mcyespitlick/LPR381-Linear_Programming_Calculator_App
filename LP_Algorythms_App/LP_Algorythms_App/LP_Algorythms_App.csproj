@@ -46,10 +46,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Business Layer\Branch&amp;Bound.cs" />
+    <Compile Include="Business Layer\CuttingPlane.cs" />
     <Compile Include="Business Layer\DataConversion.cs" />
     <Compile Include="Business Layer\DataHandler.cs" />
+    <Compile Include="Business Layer\Knapsack.cs" />
     <Compile Include="Business Layer\Model.cs" />
     <Compile Include="Business Layer\Reused_Algorythms.cs" />
+    <Compile Include="Business Layer\SensitivityAnalysis.cs" />
     <Compile Include="Presentation Layer\Form1.cs">
       <SubType>Form</SubType>
     </Compile>

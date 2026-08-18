@@ -99,7 +99,7 @@ namespace LP_Algorythms_App.Business_Layer
                     var constraints = PrimalResult.tablues[itterationNumber].Constraints;
 
                     //Pivot column is initialised outside the if/else so when its called later it doesnt complain.
-                    int PivotColumn = 0;
+                    int PivotColumn = -1;
                     if (PrimalResult.tablues[0].ObjectiveType.ToLower() == "min")
                     {
                         double max = coefficients.Max();
@@ -256,7 +256,7 @@ namespace LP_Algorythms_App.Business_Layer
                     itterationNumber++;
 
 
-                    if (itterationNumber == 10000)
+                    if (itterationNumber >= 10000)
                     {
                         PrimalResult.EndResult = "Exceeded 10000 itterations";
                         break;
@@ -274,244 +274,250 @@ namespace LP_Algorythms_App.Business_Layer
         }
         #endregion
 
+        /*  first attempt at dual simplex
+#region Dual simplex first attempt
+public bool DualSimplex(StandardModel initialTable, ResolvedModel TwoPhaseResult, out ResolvedModel DualResult)
+{
+    DualResult = new ResolvedModel();
+    DualResult.tablues = new List<StandardModel>();
 
-        public bool DualSimplex(StandardModel initialTable, ResolvedModel TwoPhaseResult, out ResolvedModel DualResult)
+    try
+    {
+        if (TwoPhaseResult != null)
         {
-            DualResult = new ResolvedModel();
-            DualResult.tablues = new List<StandardModel>();
+            int TablueCount = TwoPhaseResult.tablues.Count - 1;
+            StandardModel DroppedAColumns = new StandardModel();
+            DroppedAColumns.VariableNames = new List<string>();
+            DroppedAColumns.ObjectiveCoefficients = new List<double>();
+            DroppedAColumns.Constraints = new List<Constraint>();
+            DroppedAColumns.SignRestrictions = new List<string>();
+            DroppedAColumns.ObjectiveType = TwoPhaseResult.tablues[TablueCount].ObjectiveType;
+            DroppedAColumns.ObjectiveFunctionRHS = TwoPhaseResult.tablues[TablueCount].ObjectiveFunctionRHS;
 
-            try
+
+            for (int i = 0; i < TwoPhaseResult.tablues[TablueCount].Constraints.Count; i++) //for each row
             {
-                if (TwoPhaseResult != null)
+
+                DroppedAColumns.Constraints.Add(new Constraint { Coefficients = new List<double>() });
+                DroppedAColumns.Constraints[i].Relation = TwoPhaseResult.tablues[TablueCount].Constraints[i].Relation;
+                DroppedAColumns.Constraints[i].RHS = TwoPhaseResult.tablues[TablueCount].Constraints[i].RHS;
+
+                for (int j = 0; j < TwoPhaseResult.tablues[TablueCount].ObjectiveCoefficients.Count; j++)//foreach Column
                 {
-                    int TablueCount = TwoPhaseResult.tablues.Count - 1;
-                    StandardModel DroppedAColumns = new StandardModel();
-                    DroppedAColumns.VariableNames = new List<string>();
-                    DroppedAColumns.ObjectiveCoefficients = new List<double>();
-                    DroppedAColumns.Constraints = new List<Constraint>();
-                    DroppedAColumns.SignRestrictions = new List<string>();
-                    DroppedAColumns.ObjectiveType = TwoPhaseResult.tablues[TablueCount].ObjectiveType;
-                    DroppedAColumns.ObjectiveFunctionRHS = TwoPhaseResult.tablues[TablueCount].ObjectiveFunctionRHS;
-
-
-                    for (int i = 0; i < TwoPhaseResult.tablues[TablueCount].Constraints.Count; i++) //for each row
+                    if (!TwoPhaseResult.tablues[TablueCount].VariableNames[j].StartsWith("a"))
                     {
-
-                        DroppedAColumns.Constraints.Add(new Constraint { Coefficients = new List<double>() });
-                        DroppedAColumns.Constraints[i].Relation = TwoPhaseResult.tablues[TablueCount].Constraints[i].Relation;
-                        DroppedAColumns.Constraints[i].RHS = TwoPhaseResult.tablues[TablueCount].Constraints[i].RHS;
-
-                        for (int j = 0; j < TwoPhaseResult.tablues[TablueCount].ObjectiveCoefficients.Count; j++)//foreach Column
-                        {
-                            if (!TwoPhaseResult.tablues[TablueCount].VariableNames[j].StartsWith("a"))
-                            {
-                                DroppedAColumns.Constraints[i].Coefficients.Add(TwoPhaseResult.tablues[TablueCount].Constraints[i].Coefficients[j]);
-                            }
-
-                        }
-
+                        DroppedAColumns.Constraints[i].Coefficients.Add(TwoPhaseResult.tablues[TablueCount].Constraints[i].Coefficients[j]);
                     }
 
-                    for (int j = 0; j < TwoPhaseResult.tablues[TablueCount].ObjectiveCoefficients.Count; j++)//foreach Column
-                    {
-                        if (!TwoPhaseResult.tablues[TablueCount].VariableNames[j].StartsWith("a"))
-                        {
-                            DroppedAColumns.ObjectiveCoefficients.Add(TwoPhaseResult.tablues[TablueCount].ObjectiveCoefficients[j]);
-                            DroppedAColumns.SignRestrictions.Add(TwoPhaseResult.tablues[TablueCount].SignRestrictions[j]);
-                        }
-                    }
+                }
 
-                    DualResult.tablues.Add(DroppedAColumns);
+            }
+
+            for (int j = 0; j < TwoPhaseResult.tablues[TablueCount].ObjectiveCoefficients.Count; j++)//foreach Column
+            {
+                if (!TwoPhaseResult.tablues[TablueCount].VariableNames[j].StartsWith("a"))
+                {
+                    DroppedAColumns.ObjectiveCoefficients.Add(TwoPhaseResult.tablues[TablueCount].ObjectiveCoefficients[j]);
+                    DroppedAColumns.SignRestrictions.Add(TwoPhaseResult.tablues[TablueCount].SignRestrictions[j]);
+                }
+            }
+
+            DualResult.tablues.Add(DroppedAColumns);
+        }
+        else
+        {
+            DualResult.tablues.Add(initialTable);
+        }
+
+
+        int itterationNumber = 0;
+
+        while (true)
+        {
+            StandardModel current = DualResult.tablues[itterationNumber];
+
+            // check if all RHS are non-negative -> done
+            bool allNonNegative = true;
+            for (int i = 0; i < current.Constraints.Count; i++)
+            {
+                if (current.Constraints[i].RHS < 0)
+                {
+                    allNonNegative = false;
+                    break;
+                }
+            }
+
+            if (allNonNegative)
+            {
+                // check optimality of objective row similar to primal
+                bool optimal = false;
+                if (current.ObjectiveType.ToLower() == "min")
+                {
+                    double OptimalityCheck = current.ObjectiveCoefficients.Max();
+                    if (OptimalityCheck <= 0)
+                    {
+                        optimal = true;
+                    }
                 }
                 else
                 {
-                    DualResult.tablues.Add(initialTable);
+                    double OptimalityCheck = current.ObjectiveCoefficients.Min();
+                    if (OptimalityCheck >= 0)
+                    {
+                        optimal = true;
+                    }
                 }
 
+                DualResult.EndResult = optimal ? "optimal" : "feasible";
+                break;
+            }
 
-                int itterationNumber = 0;
-
-                while (true)
+            // choose pivot row: most negative RHS
+            int PivotRow = -1;
+            double mostNegative = Double.MaxValue;
+            for (int i = 0; i < current.Constraints.Count; i++)
+            {
+                if (current.Constraints[i].RHS < mostNegative)
                 {
-                    StandardModel current = DualResult.tablues[itterationNumber];
+                    mostNegative = current.Constraints[i].RHS;
+                    PivotRow = i;
+                }
+            }
 
-                    // check if all RHS are non-negative -> done
-                    bool allNonNegative = true;
-                    for (int i = 0; i < current.Constraints.Count; i++)
+            if (PivotRow == -1)
+            {
+                DualResult.EndResult = "infeasible";
+                break;
+            }
+
+            // choose pivot column: for a_rj < 0, pick j with minimal ratio c_j / a_rj (leftmost tie-break)
+            int PivotColumn = -1;
+            double bestRatio = Double.MaxValue;
+            for (int j = 0; j < current.ObjectiveCoefficients.Count; j++)
+            {
+                double a_rj = current.Constraints[PivotRow].Coefficients[j];
+                if (a_rj < 0)
+                {
+                    double ratio = current.ObjectiveCoefficients[j] / a_rj;
+                    if (ratio < bestRatio)
                     {
-                        if (current.Constraints[i].RHS < 0)
-                        {
-                            allNonNegative = false;
-                            break;
-                        }
+                        bestRatio = ratio;
+                        PivotColumn = j;
                     }
+                }
+            }
 
-                    if (allNonNegative)
+            if (PivotColumn == -1)
+            {
+                DualResult.EndResult = "infeasible";
+                break;
+            }
+
+            StandardModel itteration = new StandardModel();
+            itteration.ObjectiveCoefficients = new List<double>();
+            itteration.Constraints = new List<Constraint>();
+
+            for (int i = 0; i < current.Constraints.Count; i++)
+            {
+                itteration.Constraints.Add(new Constraint { Coefficients = new List<double>() });
+            }
+
+            // update objective coefficients
+            for (int j = 0; j < current.ObjectiveCoefficients.Count; j++)
+            {
+                itteration.ObjectiveCoefficients.Add(
+                    (current.ObjectiveCoefficients[j])
+                    -
+                    (current.ObjectiveCoefficients[PivotColumn]
+                    *
+                    ((current.Constraints[PivotRow].Coefficients[j])
+                    /
+                    (current.Constraints[PivotRow].Coefficients[PivotColumn]))));
+            }
+
+            itteration.ObjectiveFunctionRHS =
+                ((current.ObjectiveFunctionRHS)
+                -
+                (current.ObjectiveCoefficients[PivotColumn]
+                *
+                ((current.Constraints[PivotRow].RHS)
+                /
+                (current.Constraints[PivotRow].Coefficients[PivotColumn]))));
+
+            // pivot constraints
+            for (int i = 0; i < current.Constraints.Count; i++)
+            {
+                if (i != PivotRow)
+                {
+                    for (int j = 0; j < current.Constraints[i].Coefficients.Count; j++)
                     {
-                        // check optimality of objective row similar to primal
-                        bool optimal = false;
-                        if (current.ObjectiveType.ToLower() == "min")
-                        {
-                            double OptimalityCheck = current.ObjectiveCoefficients.Max();
-                            if (OptimalityCheck <= 0)
-                            {
-                                optimal = true;
-                            }
-                        }
-                        else
-                        {
-                            double OptimalityCheck = current.ObjectiveCoefficients.Min();
-                            if (OptimalityCheck >= 0)
-                            {
-                                optimal = true;
-                            }
-                        }
-
-                        DualResult.EndResult = optimal ? "optimal" : "feasible";
-                        break;
-                    }
-
-                    // choose pivot row: most negative RHS
-                    int PivotRow = -1;
-                    double mostNegative = Double.MaxValue;
-                    for (int i = 0; i < current.Constraints.Count; i++)
-                    {
-                        if (current.Constraints[i].RHS < mostNegative)
-                        {
-                            mostNegative = current.Constraints[i].RHS;
-                            PivotRow = i;
-                        }
-                    }
-
-                    if (PivotRow == -1)
-                    {
-                        DualResult.EndResult = "infeasible";
-                        break;
-                    }
-
-                    // choose pivot column: for a_rj < 0, pick j with minimal ratio c_j / a_rj (leftmost tie-break)
-                    int PivotColumn = -1;
-                    double bestRatio = Double.MaxValue;
-                    for (int j = 0; j < current.ObjectiveCoefficients.Count; j++)
-                    {
-                        double a_rj = current.Constraints[PivotRow].Coefficients[j];
-                        if (a_rj < 0)
-                        {
-                            double ratio = current.ObjectiveCoefficients[j] / a_rj;
-                            if (ratio < bestRatio)
-                            {
-                                bestRatio = ratio;
-                                PivotColumn = j;
-                            }
-                        }
-                    }
-
-                    if (PivotColumn == -1)
-                    {
-                        DualResult.EndResult = "infeasible";
-                        break;
-                    }
-
-                    StandardModel itteration = new StandardModel();
-                    itteration.ObjectiveCoefficients = new List<double>();
-                    itteration.Constraints = new List<Constraint>();
-
-                    for (int i = 0; i < current.Constraints.Count; i++)
-                    {
-                        itteration.Constraints.Add(new Constraint { Coefficients = new List<double>() });
-                    }
-
-                    // update objective coefficients
-                    for (int j = 0; j < current.ObjectiveCoefficients.Count; j++)
-                    {
-                        itteration.ObjectiveCoefficients.Add(
-                            (current.ObjectiveCoefficients[j])
+                        itteration.Constraints[i].Coefficients.Add(
+                            (current.Constraints[i].Coefficients[j])
                             -
-                            (current.ObjectiveCoefficients[PivotColumn]
+                            (current.Constraints[i].Coefficients[PivotColumn]
                             *
                             ((current.Constraints[PivotRow].Coefficients[j])
                             /
-                            (current.Constraints[PivotRow].Coefficients[PivotColumn]))));
+                            ((current.Constraints[PivotRow].Coefficients[PivotColumn])))));
                     }
 
-                    itteration.ObjectiveFunctionRHS =
-                        ((current.ObjectiveFunctionRHS)
+                    itteration.Constraints[i].RHS =
+                        ((current.Constraints[i].RHS)
                         -
-                        (current.ObjectiveCoefficients[PivotColumn]
+                        (current.Constraints[i].Coefficients[PivotColumn])
                         *
                         ((current.Constraints[PivotRow].RHS)
                         /
-                        (current.Constraints[PivotRow].Coefficients[PivotColumn]))));
-
-                    // pivot constraints
-                    for (int i = 0; i < current.Constraints.Count; i++)
+                        ((current.Constraints[PivotRow].Coefficients[PivotColumn]))));
+                }
+                else
+                {
+                    for (int j = 0; j < current.Constraints[i].Coefficients.Count; j++)
                     {
-                        if (i != PivotRow)
-                        {
-                            for (int j = 0; j < current.Constraints[i].Coefficients.Count; j++)
-                            {
-                                itteration.Constraints[i].Coefficients.Add(
-                                    (current.Constraints[i].Coefficients[j])
-                                    -
-                                    (current.Constraints[i].Coefficients[PivotColumn]
-                                    *
-                                    ((current.Constraints[PivotRow].Coefficients[j])
-                                    /
-                                    ((current.Constraints[PivotRow].Coefficients[PivotColumn])))));
-                            }
-
-                            itteration.Constraints[i].RHS =
-                                ((current.Constraints[i].RHS)
-                                -
-                                (current.Constraints[i].Coefficients[PivotColumn])
-                                *
-                                ((current.Constraints[PivotRow].RHS)
-                                /
-                                ((current.Constraints[PivotRow].Coefficients[PivotColumn]))));
-                        }
-                        else
-                        {
-                            for (int j = 0; j < current.Constraints[i].Coefficients.Count; j++)
-                            {
-                                itteration.Constraints[i].Coefficients.Add(
-                                    current.Constraints[i].Coefficients[j]
-                                    /
-                                    current.Constraints[i].Coefficients[PivotColumn]);
-                            }
-
-                            itteration.Constraints[i].RHS =
-                                (
-                                (current.Constraints[i].RHS)
-                                /
-                                (current.Constraints[i].Coefficients[PivotColumn])
-                                );
-                        }
+                        itteration.Constraints[i].Coefficients.Add(
+                            current.Constraints[i].Coefficients[j]
+                            /
+                            current.Constraints[i].Coefficients[PivotColumn]);
                     }
 
-                    itteration.SignRestrictions = initialTable.SignRestrictions;
-                    itteration.ObjectiveType = initialTable.ObjectiveType;
-                    itteration.VariableNames = initialTable.VariableNames;
-                    itteration.VariableNames.RemoveAll(name => name.StartsWith("a"));
-
-                    DualResult.tablues.Add(itteration);
-                    itterationNumber++;
-
-                    if (itterationNumber == 10000)
-                    {
-                        DualResult.EndResult = "Exceeded 10000 itterations";
-                        break;
-                    }
+                    itteration.Constraints[i].RHS =
+                        (
+                        (current.Constraints[i].RHS)
+                        /
+                        (current.Constraints[i].Coefficients[PivotColumn])
+                        );
                 }
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Dual simplex failed");
-                Console.WriteLine(ex.ToString());
-                return false;
-            }
 
-            return true;
+            itteration.SignRestrictions = initialTable.SignRestrictions;
+            itteration.ObjectiveType = initialTable.ObjectiveType;
+            itteration.VariableNames = initialTable.VariableNames;
+            itteration.VariableNames.RemoveAll(name => name.StartsWith("a"));
+
+            DualResult.tablues.Add(itteration);
+            itterationNumber++;
+
+            if (itterationNumber == 10000)
+            {
+                DualResult.EndResult = "Exceeded 10000 itterations";
+                break;
+            }
         }
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine("Dual simplex failed");
+        Console.WriteLine(ex.ToString());
+        return false;
+    }
+
+    return true;
+}
+#endregion
+
+*/
+
+
 
         #region Method to do Two-Phase
         public bool TwoPhase(StandardModel initialTable, out ResolvedModel TwoPhasedResolved)
@@ -684,7 +690,7 @@ namespace LP_Algorythms_App.Business_Layer
                         TwoPhasedResolved.EndResult = "optimal";
                     }
 
-                    if(itterationNumber == 10000)
+                    if(itterationNumber >= 10000)
                     {
                         TwoPhasedResolved.EndResult = "Exceeded 10000 itterations";
                         break;
@@ -704,6 +710,201 @@ namespace LP_Algorythms_App.Business_Layer
 
             return true;
         }
+        #endregion
+
+
+
+        #region Dual simplex method
+        public bool DualSimplex(ResolvedModel InitialTablues, out ResolvedModel DualResult)
+        {
+
+            int initialLength = InitialTablues.tablues.Count -1; //does the minus one to get the index of the last tablue/list.
+            DualResult = new ResolvedModel();
+            DualResult.tablues = new List<StandardModel>();
+            DualResult.tablues.Add(InitialTablues.tablues[initialLength]);
+
+
+            try
+            {
+
+                int itterationNumber = 0;
+                bool optimal = false;
+
+                while (optimal == false)
+                {
+                    StandardModel current = DualResult.tablues[itterationNumber];
+                    var coefficients = DualResult.tablues[itterationNumber].ObjectiveCoefficients;
+                    var constraints = DualResult.tablues[itterationNumber].Constraints;
+
+
+
+                    // check if all RHS are non-negative -> done
+                    bool allNonNegative = true;
+                    for (int i = 0; i < current.Constraints.Count; i++)
+                    {
+                        if (current.Constraints[i].RHS < -1e-9)
+                        {
+                            allNonNegative = false;
+                            break;
+                        }
+                    }
+                    if (allNonNegative)
+                    {
+                        DualResult.EndResult = "Optimal";
+                        break;
+                    }
+
+                    //checks the pivot row
+                    int PivotRow = -1;
+                    double mostNegative = -1e-9; // also to prevent errors via double shenanigans.
+                    for (int i = 0; i < current.Constraints.Count; i++)
+                    {
+                        if (current.Constraints[i].RHS < mostNegative)
+                        {
+                            mostNegative = current.Constraints[i].RHS;
+                            PivotRow = i;
+                        }
+                    }
+
+                    // at this stage, if pivot row is -1 that means all RHS values are 0, meaning its degenerate.
+                    if (PivotRow == -1)
+                    {
+                        DualResult.EndResult = "Degenerate";
+                        break;
+                    }
+
+
+                    int PivotColumn = -1;
+                    double bestRatio = double.MaxValue;
+
+                    for (int i = 0; i < current.ObjectiveCoefficients.Count; i++)
+                    {
+                        double a = current.Constraints[PivotRow].Coefficients[i];
+                        if (a < -1e-9)                              // this is to prevent the weird quirk with doubles, where it can randomlt generate tiny numbers like -1e-27 (-0.0000000000000000000000000001)
+                        {
+                            double ratio = Math.Abs(current.ObjectiveCoefficients[i] / a);
+                            if (ratio < bestRatio)
+                            {
+                                bestRatio = ratio;
+                                PivotColumn = i;
+                            }
+                        }
+                    }
+
+                    if (PivotColumn == -1)
+                    {
+                        DualResult.EndResult = "infeasible";
+                        break;
+                    }
+
+                    StandardModel itteration = new StandardModel();
+                    itteration.ObjectiveCoefficients = new List<double>();
+                    itteration.Constraints = new List<Constraint>();
+
+
+                    for (int i = 0; i < current.Constraints.Count; i++)
+                    {
+                        itteration.Constraints.Add(new Constraint { Coefficients = new List<double>() });
+                    }
+
+
+                    // update objective coefficients
+                    for (int j = 0; j < current.ObjectiveCoefficients.Count; j++)
+                    {
+                        itteration.ObjectiveCoefficients.Add(
+                            (current.ObjectiveCoefficients[j])
+                            -
+                            (current.ObjectiveCoefficients[PivotColumn]
+                            *
+                            ((current.Constraints[PivotRow].Coefficients[j])
+                            /
+                            (current.Constraints[PivotRow].Coefficients[PivotColumn]))));
+                    }
+
+                    itteration.ObjectiveFunctionRHS =
+                        ((current.ObjectiveFunctionRHS)
+                        -
+                        (current.ObjectiveCoefficients[PivotColumn]
+                        *
+                        ((current.Constraints[PivotRow].RHS)
+                        /
+                        (current.Constraints[PivotRow].Coefficients[PivotColumn]))));
+
+                    // pivot constraints
+                    for (int i = 0; i < current.Constraints.Count; i++)
+                    {
+                        if (i != PivotRow)
+                        {
+                            for (int j = 0; j < current.Constraints[i].Coefficients.Count; j++)
+                            {
+                                itteration.Constraints[i].Coefficients.Add(
+                                    (current.Constraints[i].Coefficients[j])
+                                    -
+                                    (current.Constraints[i].Coefficients[PivotColumn]
+                                    *
+                                    ((current.Constraints[PivotRow].Coefficients[j])
+                                    /
+                                    ((current.Constraints[PivotRow].Coefficients[PivotColumn])))));
+                            }
+
+                            itteration.Constraints[i].RHS =
+                                ((current.Constraints[i].RHS)
+                                -
+                                (current.Constraints[i].Coefficients[PivotColumn])
+                                *
+                                ((current.Constraints[PivotRow].RHS)
+                                /
+                                ((current.Constraints[PivotRow].Coefficients[PivotColumn]))));
+                        }
+                        else
+                        {
+                            for (int j = 0; j < current.Constraints[i].Coefficients.Count; j++)
+                            {
+                                itteration.Constraints[i].Coefficients.Add(
+                                    current.Constraints[i].Coefficients[j]
+                                    /
+                                    current.Constraints[i].Coefficients[PivotColumn]);
+                            }
+
+                            itteration.Constraints[i].RHS =
+                                (
+                                (current.Constraints[i].RHS)
+                                /
+                                (current.Constraints[i].Coefficients[PivotColumn])
+                                );
+                        }
+                    }
+
+                    itteration.SignRestrictions = current.SignRestrictions;
+                    itteration.ObjectiveType = current.ObjectiveType;
+                    itteration.VariableNames = current.VariableNames;
+
+                    DualResult.tablues.Add(itteration);
+                    itterationNumber++;
+
+                    if (itterationNumber >= 10000)
+                    {
+                        DualResult.EndResult = "Exceeded 10000 itterations";
+                        break;
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Dual simplex failed");
+                Console.WriteLine("Error in Dual simplex calculation");
+
+                DualResult.EndResult = "error";
+                Console.WriteLine(ex.ToString());
+                return false;
+            }
+            return true;
+        }
+        #endregion
     }
 }
-    #endregion
+
+
+
+

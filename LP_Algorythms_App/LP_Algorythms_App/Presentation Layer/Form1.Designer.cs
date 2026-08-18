@@ -46,7 +46,7 @@
             this.dgvTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvTable.Location = new System.Drawing.Point(244, 59);
             this.dgvTable.Name = "dgvTable";
-            this.dgvTable.Size = new System.Drawing.Size(1121, 358);
+            this.dgvTable.Size = new System.Drawing.Size(1147, 358);
             this.dgvTable.TabIndex = 0;
             // 
             // btnExit
@@ -133,7 +133,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1284, 450);
+            this.ClientSize = new System.Drawing.Size(1424, 450);
             this.Controls.Add(this.btnDualSimplex);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.PrimalSimplex);
