@@ -86,29 +86,83 @@ namespace LP_Algorythms_App.Business_Layer
         #region Method to convert the canonical (parsed) data into standard form
         public bool ToStandard(ParsedModel model, out StandardModel NewModel) 
         {
+            //creates a deep copy of the Parsed model so that it never gets modified.
+            ParsedModel modelCopy = new ParsedModel();
+            modelCopy.ObjectiveType = model.ObjectiveType;
+            modelCopy.ObjectiveCoefficients = new List<double>(model.ObjectiveCoefficients);
+            modelCopy.SignRestrictions = new List<string>(model.SignRestrictions);
+            modelCopy.Constraints = new List<Constraint>();
+            foreach (var c in model.Constraints)
+            {
+                modelCopy.Constraints.Add(new Constraint
+                {
+                    Coefficients = new List<double>(c.Coefficients),
+                    Relation = c.Relation,
+                    RHS = c.RHS
+                });
+            }
+
+
             NewModel = null;
-            int NumberOfConstraints = model.Constraints.Count;
+
             int NumberOfColumns = model.ObjectiveCoefficients.Count;
             
             try
             {
+                // adding new constraints to deal with the Binary constraints
+
+                List<int> BinIndexes = new List<int>();
+
+                for (int i = 0;i< modelCopy.SignRestrictions.Count; i++)
+                {
+                    string sign = modelCopy.SignRestrictions[i];
+                    if (modelCopy.SignRestrictions[i].ToLower() == "bin")
+                    {
+                        BinIndexes.Add(i);
+                    }
+                }
+
+                for (int i=0; i< BinIndexes.Count; i++)
+                {
+                    int BinColumn = BinIndexes[i];
+                    Constraint BinConstraint = new Constraint();
+                    BinConstraint.Coefficients = new List<double>();
+                    BinConstraint.RHS = 1;
+                    BinConstraint.Relation = "<=";
+
+                    for (int j = 0; j < modelCopy.ObjectiveCoefficients.Count; j++)
+                    {
+                        if(j == BinColumn)
+                        {
+                            BinConstraint.Coefficients.Add(1);
+                        }
+                        else
+                        {
+                            BinConstraint.Coefficients.Add(0);
+                        }
+
+                    }
+                    modelCopy.Constraints.Add(BinConstraint);
+                }
+
+                int NumberOfConstraints = modelCopy.Constraints.Count;
 
                 //this checks where the sign constraints are scanned for URS and '-', as these will require further transormations in their column
                 //-----------------------------
-                
+
                 List<int> negativeSign = new List<int>();
                 List<int> ursSign = new List<int>();
                 List<String> SignRestrictions = new List<String>();
 
 
 
-                for (int i = 0; i < model.SignRestrictions.Count; i++)
+                for (int i = 0; i < modelCopy.SignRestrictions.Count; i++)
                 {
-                    if (model.SignRestrictions[i] == "-")
+                    if (modelCopy.SignRestrictions[i] == "-")
                     {
                         negativeSign.Add(i);
                     }
-                    else if (model.SignRestrictions[i] == "urs")
+                    else if (modelCopy.SignRestrictions[i] == "urs")
                     {
                         ursSign.Add(i);
                     }
@@ -120,36 +174,36 @@ namespace LP_Algorythms_App.Business_Layer
 
                 StandardModel standardModel = new StandardModel();
 
-                standardModel.ObjectiveType = model.ObjectiveType; //just reads in the Objective type
+                standardModel.ObjectiveType = modelCopy.ObjectiveType; //just reads in the Objective type
 
                 //Checks the constraint's signs and RHS, flips all values and sign if RHS is negative.
                 //then reads the signs to see how many extra columns will be required due to the slacks, excesses and artificial values.
                 for (int i = 0; i < NumberOfConstraints; i++)
                 {
-                    if (model.Constraints[i].RHS < 0)
+                    if (modelCopy.Constraints[i].RHS < 0)
                     {
-                        for (int j = 0; j < model.Constraints[i].Coefficients.Count; j++)
+                        for (int j = 0; j < modelCopy.Constraints[i].Coefficients.Count; j++)
                         {
-                            model.Constraints[i].Coefficients[j] = -model.Constraints[i].Coefficients[j];
+                            modelCopy.Constraints[i].Coefficients[j] = -modelCopy.Constraints[i].Coefficients[j];
                         }
-                        model.Constraints[i].RHS = -model.Constraints[i].RHS;
+                        modelCopy.Constraints[i].RHS = -modelCopy.Constraints[i].RHS;
 
-                        if (model.Constraints[i].Relation == ">=")
+                        if (modelCopy.Constraints[i].Relation == ">=")
                         {
-                            model.Constraints[i].Relation = "<=";
+                            modelCopy.Constraints[i].Relation = "<=";
                         } else 
-                        if (model.Constraints[i].Relation == "<=")
+                        if (modelCopy.Constraints[i].Relation == "<=")
                         {
-                            model.Constraints[i].Relation = ">=";
+                                modelCopy.Constraints[i].Relation = ">=";
                         }
                     }
 
-                    if (model.Constraints[i].Relation == "<=" || model.Constraints[i].Relation == "=")
+                    if (modelCopy.Constraints[i].Relation == "<=" || modelCopy.Constraints[i].Relation == "=")
                     {
                         NumberOfColumns++;
                     }
                     
-                    if(model.Constraints[i].Relation == ">=")
+                    if(modelCopy.Constraints[i].Relation == ">=")
                     {
                         NumberOfColumns += 2;
                     }
@@ -165,18 +219,18 @@ namespace LP_Algorythms_App.Business_Layer
                 standardModel.SignRestrictions = new List<String>();
 
                 int ExtraColumn = 0;
-                for (int i = 0; i < model.ObjectiveCoefficients.Count; i++)
+                for (int i = 0; i < modelCopy.ObjectiveCoefficients.Count; i++)
                 {
                     if (negativeSign.Contains(i))
                     {
-                        standardModel.ObjectiveCoefficients.Add(model.ObjectiveCoefficients[i]);
+                        standardModel.ObjectiveCoefficients.Add(modelCopy.ObjectiveCoefficients[i]);
                         VariableNames.Add("x" + (i + 1) + "'");
                         standardModel.SignRestrictions.Add("none");
                     }
                     else if (ursSign.Contains(i))
                     {
-                        standardModel.ObjectiveCoefficients.Add(-(model.ObjectiveCoefficients[i]));
-                        standardModel.ObjectiveCoefficients.Add(model.ObjectiveCoefficients[i]);
+                        standardModel.ObjectiveCoefficients.Add(-(modelCopy.ObjectiveCoefficients[i]));
+                        standardModel.ObjectiveCoefficients.Add(modelCopy.ObjectiveCoefficients[i]);
 
                         VariableNames.Add("x" + (i + 1));
                         VariableNames.Add("x" + (i + 1) + "'");
@@ -188,14 +242,14 @@ namespace LP_Algorythms_App.Business_Layer
                     }
                     else
                     {
-                        standardModel.ObjectiveCoefficients.Add(-(model.ObjectiveCoefficients[i]));
+                        standardModel.ObjectiveCoefficients.Add(-(modelCopy.ObjectiveCoefficients[i]));
                         VariableNames.Add("x" + (i + 1));
 
-                        if (model.SignRestrictions[i] == "bin")
+                        if (modelCopy.SignRestrictions[i] == "bin")
                             standardModel.SignRestrictions.Add("bin");
-                        else if (model.SignRestrictions[i] == "int")
+                        else if (modelCopy.SignRestrictions[i] == "int")
                             standardModel.SignRestrictions.Add("int");
-                        else if (model.SignRestrictions[i] == "+")
+                        else if (modelCopy.SignRestrictions[i] == "+")
                             standardModel.SignRestrictions.Add("none");
                         else
                             standardModel.SignRestrictions.Add("invalid");
@@ -231,24 +285,24 @@ namespace LP_Algorythms_App.Business_Layer
 
 
 
-                    if (model.Constraints[i].Relation == "<=" || model.Constraints[i].Relation == "=")
+                    if (modelCopy.Constraints[i].Relation == "<=" || modelCopy.Constraints[i].Relation == "=")
                     {
                           
-                        for (int j = 0; j < model.Constraints[i].Coefficients.Count; j++)
+                        for (int j = 0; j < modelCopy.Constraints[i].Coefficients.Count; j++)
                         {
                             if (negativeSign.Contains(j))
                             {
-                                constraint.Coefficients.Add(-(model.Constraints[i].Coefficients[j]));
+                                constraint.Coefficients.Add(-(modelCopy.Constraints[i].Coefficients[j]));
                             }
                             else if (ursSign.Contains(j))
                             {
-                                constraint.Coefficients.Add((model.Constraints[i].Coefficients[j]));
-                                constraint.Coefficients.Add(-(model.Constraints[i].Coefficients[j]));
+                                constraint.Coefficients.Add((modelCopy.Constraints[i].Coefficients[j]));
+                                constraint.Coefficients.Add(-(modelCopy.Constraints[i].Coefficients[j]));
                                 ExtraColumn++;
                             }
                             else
                             {
-                                constraint.Coefficients.Add(model.Constraints[i].Coefficients[j]);
+                                constraint.Coefficients.Add(modelCopy.Constraints[i].Coefficients[j]);
                                 
                             }
 
@@ -258,8 +312,8 @@ namespace LP_Algorythms_App.Business_Layer
                             constraint.Coefficients.Add(0);
                         }
 
-                        constraint.RHS = model.Constraints[i].RHS;
-                        constraint.Relation = model.Constraints[i].Relation;
+                        constraint.RHS = modelCopy.Constraints[i].RHS;
+                        constraint.Relation = modelCopy.Constraints[i].Relation;
 
                         for (int k = 0; k < standardModel.Constraints.Count; k++)
                         {
@@ -267,28 +321,28 @@ namespace LP_Algorythms_App.Business_Layer
                         }
 
                         constraint.Coefficients.Add(1);
-                        VariableNames.Add((model.Constraints[i].Relation == "<=") ? "s" + (i + 1) : "a" + (i + 1));
+                        VariableNames.Add((modelCopy.Constraints[i].Relation == "<=") ? "s" + (i + 1) : "a" + (i + 1));
                         Zeros++;
                         standardModel.Constraints.Add(constraint);
                     }
 
-                    if (model.Constraints[i].Relation == ">=")
+                    if (modelCopy.Constraints[i].Relation == ">=")
                     {
-                        for (int j = 0; j < model.Constraints[i].Coefficients.Count; j++)
+                        for (int j = 0; j < modelCopy.Constraints[i].Coefficients.Count; j++)
                         {
                             if (negativeSign.Contains(j))
                             {
-                                constraint.Coefficients.Add(-(model.Constraints[i].Coefficients[j]));
+                                constraint.Coefficients.Add(-(modelCopy.Constraints[i].Coefficients[j]));
                             }
                             else if (ursSign.Contains(j))
                             {
-                                constraint.Coefficients.Add(model.Constraints[i].Coefficients[j]);
-                                constraint.Coefficients.Add(-(model.Constraints[i].Coefficients[j]));
+                                constraint.Coefficients.Add(modelCopy.Constraints[i].Coefficients[j]);
+                                constraint.Coefficients.Add(-(modelCopy.Constraints[i].Coefficients[j]));
                                 ExtraColumn++;
                             }
                             else
                             {
-                                constraint.Coefficients.Add(model.Constraints[i].Coefficients[j]);
+                                constraint.Coefficients.Add(modelCopy.Constraints[i].Coefficients[j]);
                             }
                         }
 
@@ -297,8 +351,8 @@ namespace LP_Algorythms_App.Business_Layer
                             constraint.Coefficients.Add(0);
                         }
 
-                        constraint.RHS = model.Constraints[i].RHS;
-                        constraint.Relation = model.Constraints[i].Relation;
+                        constraint.RHS = modelCopy.Constraints[i].RHS;
+                        constraint.Relation = modelCopy.Constraints[i].Relation;
 
                         for (int k = 0; k < standardModel.Constraints.Count; k++)
                         {
