@@ -38,6 +38,7 @@
             this.PrimalSimplex = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.btnDualSimplex = new System.Windows.Forms.Button();
+            this.btnRevisedSimplex = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTable)).BeginInit();
             this.SuspendLayout();
             // 
@@ -71,7 +72,7 @@
             // 
             // btnStandard
             // 
-            this.btnStandard.Location = new System.Drawing.Point(13, 141);
+            this.btnStandard.Location = new System.Drawing.Point(13, 118);
             this.btnStandard.Name = "btnStandard";
             this.btnStandard.Size = new System.Drawing.Size(186, 23);
             this.btnStandard.TabIndex = 3;
@@ -129,11 +130,22 @@
             this.btnDualSimplex.UseVisualStyleBackColor = true;
             this.btnDualSimplex.Click += new System.EventHandler(this.btnDualSimplex_Click);
             // 
+            // btnRevisedSimplex
+            // 
+            this.btnRevisedSimplex.Location = new System.Drawing.Point(18, 280);
+            this.btnRevisedSimplex.Name = "btnRevisedSimplex";
+            this.btnRevisedSimplex.Size = new System.Drawing.Size(181, 23);
+            this.btnRevisedSimplex.TabIndex = 9;
+            this.btnRevisedSimplex.Text = "Revised Simplex";
+            this.btnRevisedSimplex.UseVisualStyleBackColor = true;
+            this.btnRevisedSimplex.Click += new System.EventHandler(this.btnRevisedSimplex_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1424, 450);
+            this.Controls.Add(this.btnRevisedSimplex);
             this.Controls.Add(this.btnDualSimplex);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.PrimalSimplex);
@@ -162,6 +174,7 @@
         private System.Windows.Forms.Button PrimalSimplex;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnDualSimplex;
+        private System.Windows.Forms.Button btnRevisedSimplex;
     }
 }
 

@@ -29,6 +29,11 @@ namespace LP_Algorythms_App
 
         ResolvedModel DualResolved = null;
 
+        RevisedSimplex revisedSimplex = new RevisedSimplex();
+        RevisedSimplexOutput revisedOutput = new RevisedSimplexOutput();
+        RevisedSimplexResult revisedResult = null; // holds Binv/basis too, needed later for Sensitivity Analysis
+
+
         public Form1()
         {
             InitializeComponent();
@@ -194,6 +199,34 @@ namespace LP_Algorythms_App
             }
         }
 
+        private void btnRevisedSimplex_Click(object sender, EventArgs e)
+        {
+            if (standardModel == null)
+            {
+                Console.WriteLine("No standard model to solve - load data and convert to standard form first.");
+                return;
+            }
+
+            if (revisedSimplex.Solve(standardModel, out revisedResult))
+            {
+                Console.WriteLine("Revised Primal Simplex finished: " + revisedResult.Status);
+                revisedOutput.ResultToGrid(dgvTable, revisedResult);
+
+                SaveFileDialog saveFileDialog = new SaveFileDialog();
+                saveFileDialog.Filter = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*";
+                saveFileDialog.Title = "Save Revised Simplex Output";
+                saveFileDialog.FileName = "output.txt";
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    revisedOutput.WriteToFile(saveFileDialog.FileName, revisedResult);
+                    Console.WriteLine("Output written to " + saveFileDialog.FileName);
+                }
+            }
+            else
+            {
+                Console.WriteLine("Revised Primal Simplex failed.");
+            }
+        }
     }
     //================================================================================================//
 }

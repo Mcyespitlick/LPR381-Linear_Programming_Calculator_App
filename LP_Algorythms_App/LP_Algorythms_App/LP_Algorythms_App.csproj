@@ -53,6 +53,9 @@
     <Compile Include="Business Layer\Knapsack.cs" />
     <Compile Include="Business Layer\Model.cs" />
     <Compile Include="Business Layer\Reused_Algorythms.cs" />
+    <Compile Include="Business Layer\Revised Simplex\RevisedSimplex.cs" />
+    <Compile Include="Business Layer\Revised Simplex\RevisedSimplexModel.cs" />
+    <Compile Include="Business Layer\Revised Simplex\RevisedSimplexOutput.cs" />
     <Compile Include="Business Layer\SensitivityAnalysis.cs" />
     <Compile Include="Presentation Layer\Form1.cs">
       <SubType>Form</SubType>
