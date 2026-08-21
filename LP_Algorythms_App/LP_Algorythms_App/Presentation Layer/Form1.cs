@@ -32,6 +32,7 @@ namespace LP_Algorythms_App
         RevisedSimplex revisedSimplex = new RevisedSimplex();
         RevisedSimplexOutput revisedOutput = new RevisedSimplexOutput();
         RevisedSimplexResult revisedResult = null; // holds Binv/basis too, needed later for Sensitivity Analysis
+        SensitivityAnalysis sensitivityAnalysis = new SensitivityAnalysis();
 
 
         public Form1()
@@ -225,6 +226,32 @@ namespace LP_Algorythms_App
             else
             {
                 Console.WriteLine("Revised Primal Simplex failed.");
+            }
+        }
+
+        private void btnSensitivity_Click(object sender, EventArgs e)
+        {
+            if (revisedResult == null)
+            {
+                Console.WriteLine("Run Revised Simplex first to generate sensitivity information.");
+                return;
+            }
+
+            try
+            {
+                string report = sensitivityAnalysis.CreateReport(revisedResult);
+                Console.WriteLine(report);
+
+                SaveFileDialog saveFileDialog = new SaveFileDialog();
+                saveFileDialog.Filter = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*";
+                saveFileDialog.Title = "Save Sensitivity Analysis";
+                saveFileDialog.FileName = "sensitivity-analysis.txt";
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                    System.IO.File.WriteAllText(saveFileDialog.FileName, report);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Sensitivity analysis failed: " + ex.Message);
             }
         }
     }

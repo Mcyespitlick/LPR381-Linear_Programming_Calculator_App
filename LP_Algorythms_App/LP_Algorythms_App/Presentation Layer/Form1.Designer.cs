@@ -39,6 +39,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.btnDualSimplex = new System.Windows.Forms.Button();
             this.btnRevisedSimplex = new System.Windows.Forms.Button();
+            this.btnSensitivity = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTable)).BeginInit();
             this.SuspendLayout();
             // 
@@ -140,12 +141,23 @@
             this.btnRevisedSimplex.UseVisualStyleBackColor = true;
             this.btnRevisedSimplex.Click += new System.EventHandler(this.btnRevisedSimplex_Click);
             // 
+            // btnSensitivity
+            // 
+            this.btnSensitivity.Location = new System.Drawing.Point(18, 310);
+            this.btnSensitivity.Name = "btnSensitivity";
+            this.btnSensitivity.Size = new System.Drawing.Size(181, 23);
+            this.btnSensitivity.TabIndex = 10;
+            this.btnSensitivity.Text = "Sensitivity Analysis";
+            this.btnSensitivity.UseVisualStyleBackColor = true;
+            this.btnSensitivity.Click += new System.EventHandler(this.btnSensitivity_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1424, 450);
             this.Controls.Add(this.btnRevisedSimplex);
+            this.Controls.Add(this.btnSensitivity);
             this.Controls.Add(this.btnDualSimplex);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.PrimalSimplex);
@@ -175,6 +187,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnDualSimplex;
         private System.Windows.Forms.Button btnRevisedSimplex;
+        private System.Windows.Forms.Button btnSensitivity;
     }
 }
 

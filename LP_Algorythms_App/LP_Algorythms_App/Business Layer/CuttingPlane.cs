@@ -11,6 +11,7 @@ namespace LP_Algorythms_App.Business_Layer
 
         public bool CuttingPlaneAlgo(ResolvedModel model, out ResolvedModel CutModel)
         {
+            CutModel = null;
             //creates a deep copy of the Parsed model so that it never gets modified.
             ResolvedModel modelCopy = new ResolvedModel();
 
