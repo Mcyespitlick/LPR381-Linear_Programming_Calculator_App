@@ -17,6 +17,8 @@ namespace LP_Algorythms_App
         DataConversion conversion = new DataConversion();
         Reused_Algorythms reused_Algorythms = new Reused_Algorythms();
 
+        CuttingPlane cuttingPlane = new CuttingPlane();
+
 
         String[][] data = null;
         ParsedModel parsedModel = null;
@@ -26,6 +28,8 @@ namespace LP_Algorythms_App
         ResolvedModel TwoPhasedResolved = null; //will have a set of tablues, if two-phase was done
         ResolvedModel PrimalResolved = null;    //will have a set of tablues if primal simplex was done
                                                 //you will use the very last tablue if you coninue with two-phase.
+
+        ResolvedModel CutPlaneOutput = null;
 
         ResolvedModel DualResolved = null;
 
@@ -181,8 +185,6 @@ namespace LP_Algorythms_App
 };
             ResolvedModel testinput = new ResolvedModel { tablues = new List<StandardModel> { t } };
 
-
-
             bool ok = reused_Algorythms.DualSimplex2(testinput, out DualResolved);
             */
 
@@ -297,6 +299,36 @@ namespace LP_Algorythms_App
             else
             {
                 Console.WriteLine("Branch & Bound Knapsack failed: " + knapsackResult.ErrorMessage);
+            }
+        }
+
+        private void btnCuttingPlane_Click(object sender, EventArgs e)
+        {
+            
+            bool ok = cuttingPlane.CuttingPlaneAlgo(PrimalResolved, out CutPlaneOutput);
+            if (ok)
+            {
+                Console.WriteLine("CuttingPlane completed: " + (CutPlaneOutput.EndResult ?? "result unknown"));
+
+                SaveFileDialog saveFileDialog = new SaveFileDialog();
+                saveFileDialog.Filter = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*";
+                saveFileDialog.Title = "Save Cutting Plane Output";
+                saveFileDialog.FileName = "CuttingPlaneOutput.txt";
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    knapsackOutput.WriteToFile(saveFileDialog.FileName, knapsackResult);
+                    Console.WriteLine("Output written to " + saveFileDialog.FileName);
+                }
+
+
+                if (CutPlaneOutput.tablues != null && CutPlaneOutput.tablues.Count > 0)
+                {
+                    handler.WriteResolvedModel(CutPlaneOutput, "Cutting Plane", saveFileDialog.FileName);
+                }
+            }
+            else
+            {
+                Console.WriteLine("Cutting Plane failed.");
             }
         }
     }

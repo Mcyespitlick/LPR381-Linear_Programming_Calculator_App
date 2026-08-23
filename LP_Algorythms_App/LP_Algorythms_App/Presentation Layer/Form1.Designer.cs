@@ -41,6 +41,11 @@
             this.btnRevisedSimplex = new System.Windows.Forms.Button();
             this.btnSensitivity = new System.Windows.Forms.Button();
             this.btnKnapsack = new System.Windows.Forms.Button();
+            this.btnCuttingPlane = new System.Windows.Forms.Button();
+            this.btnPrintTwoPhase = new System.Windows.Forms.Button();
+            this.btnPrintPrimal = new System.Windows.Forms.Button();
+            this.btnPrintDual = new System.Windows.Forms.Button();
+            this.btnPrintCuttingPlane = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTable)).BeginInit();
             this.SuspendLayout();
             // 
@@ -49,12 +54,12 @@
             this.dgvTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvTable.Location = new System.Drawing.Point(244, 59);
             this.dgvTable.Name = "dgvTable";
-            this.dgvTable.Size = new System.Drawing.Size(1147, 358);
+            this.dgvTable.Size = new System.Drawing.Size(1219, 358);
             this.dgvTable.TabIndex = 0;
             // 
             // btnExit
             // 
-            this.btnExit.Location = new System.Drawing.Point(13, 393);
+            this.btnExit.Location = new System.Drawing.Point(10, 449);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(75, 23);
             this.btnExit.TabIndex = 1;
@@ -96,7 +101,7 @@
             // 
             this.TwoPhase.Location = new System.Drawing.Point(12, 170);
             this.TwoPhase.Name = "TwoPhase";
-            this.TwoPhase.Size = new System.Drawing.Size(187, 23);
+            this.TwoPhase.Size = new System.Drawing.Size(128, 23);
             this.TwoPhase.TabIndex = 5;
             this.TwoPhase.Text = "Two-Phase";
             this.TwoPhase.UseVisualStyleBackColor = true;
@@ -106,7 +111,7 @@
             // 
             this.PrimalSimplex.Location = new System.Drawing.Point(13, 200);
             this.PrimalSimplex.Name = "PrimalSimplex";
-            this.PrimalSimplex.Size = new System.Drawing.Size(186, 23);
+            this.PrimalSimplex.Size = new System.Drawing.Size(127, 23);
             this.PrimalSimplex.TabIndex = 6;
             this.PrimalSimplex.Text = "PrimalSimplex";
             this.PrimalSimplex.UseVisualStyleBackColor = true;
@@ -126,7 +131,7 @@
             // 
             this.btnDualSimplex.Location = new System.Drawing.Point(12, 229);
             this.btnDualSimplex.Name = "btnDualSimplex";
-            this.btnDualSimplex.Size = new System.Drawing.Size(187, 23);
+            this.btnDualSimplex.Size = new System.Drawing.Size(128, 23);
             this.btnDualSimplex.TabIndex = 8;
             this.btnDualSimplex.Text = "Dual Simplex";
             this.btnDualSimplex.UseVisualStyleBackColor = true;
@@ -134,7 +139,7 @@
             // 
             // btnRevisedSimplex
             // 
-            this.btnRevisedSimplex.Location = new System.Drawing.Point(18, 280);
+            this.btnRevisedSimplex.Location = new System.Drawing.Point(15, 336);
             this.btnRevisedSimplex.Name = "btnRevisedSimplex";
             this.btnRevisedSimplex.Size = new System.Drawing.Size(181, 23);
             this.btnRevisedSimplex.TabIndex = 9;
@@ -144,7 +149,7 @@
             // 
             // btnSensitivity
             // 
-            this.btnSensitivity.Location = new System.Drawing.Point(18, 310);
+            this.btnSensitivity.Location = new System.Drawing.Point(15, 366);
             this.btnSensitivity.Name = "btnSensitivity";
             this.btnSensitivity.Size = new System.Drawing.Size(181, 23);
             this.btnSensitivity.TabIndex = 10;
@@ -154,7 +159,7 @@
             // 
             // btnKnapsack
             // 
-            this.btnKnapsack.Location = new System.Drawing.Point(18, 340);
+            this.btnKnapsack.Location = new System.Drawing.Point(15, 396);
             this.btnKnapsack.Name = "btnKnapsack";
             this.btnKnapsack.Size = new System.Drawing.Size(181, 23);
             this.btnKnapsack.TabIndex = 11;
@@ -162,11 +167,62 @@
             this.btnKnapsack.UseVisualStyleBackColor = true;
             this.btnKnapsack.Click += new System.EventHandler(this.btnKnapsack_Click);
             // 
+            // btnCuttingPlane
+            // 
+            this.btnCuttingPlane.Location = new System.Drawing.Point(13, 258);
+            this.btnCuttingPlane.Name = "btnCuttingPlane";
+            this.btnCuttingPlane.Size = new System.Drawing.Size(127, 23);
+            this.btnCuttingPlane.TabIndex = 12;
+            this.btnCuttingPlane.Text = "CuttingPlane";
+            this.btnCuttingPlane.UseVisualStyleBackColor = true;
+            this.btnCuttingPlane.Click += new System.EventHandler(this.btnCuttingPlane_Click);
+            // 
+            // btnPrintTwoPhase
+            // 
+            this.btnPrintTwoPhase.Location = new System.Drawing.Point(156, 170);
+            this.btnPrintTwoPhase.Name = "btnPrintTwoPhase";
+            this.btnPrintTwoPhase.Size = new System.Drawing.Size(75, 23);
+            this.btnPrintTwoPhase.TabIndex = 13;
+            this.btnPrintTwoPhase.Text = "Print";
+            this.btnPrintTwoPhase.UseVisualStyleBackColor = true;
+            // 
+            // btnPrintPrimal
+            // 
+            this.btnPrintPrimal.Location = new System.Drawing.Point(156, 200);
+            this.btnPrintPrimal.Name = "btnPrintPrimal";
+            this.btnPrintPrimal.Size = new System.Drawing.Size(75, 23);
+            this.btnPrintPrimal.TabIndex = 14;
+            this.btnPrintPrimal.Text = "Print";
+            this.btnPrintPrimal.UseVisualStyleBackColor = true;
+            // 
+            // btnPrintDual
+            // 
+            this.btnPrintDual.Location = new System.Drawing.Point(156, 229);
+            this.btnPrintDual.Name = "btnPrintDual";
+            this.btnPrintDual.Size = new System.Drawing.Size(75, 23);
+            this.btnPrintDual.TabIndex = 15;
+            this.btnPrintDual.Text = "Print";
+            this.btnPrintDual.UseVisualStyleBackColor = true;
+            // 
+            // btnPrintCuttingPlane
+            // 
+            this.btnPrintCuttingPlane.Location = new System.Drawing.Point(156, 258);
+            this.btnPrintCuttingPlane.Name = "btnPrintCuttingPlane";
+            this.btnPrintCuttingPlane.Size = new System.Drawing.Size(75, 23);
+            this.btnPrintCuttingPlane.TabIndex = 16;
+            this.btnPrintCuttingPlane.Text = "Print";
+            this.btnPrintCuttingPlane.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1424, 450);
+            this.ClientSize = new System.Drawing.Size(1475, 510);
+            this.Controls.Add(this.btnPrintCuttingPlane);
+            this.Controls.Add(this.btnPrintDual);
+            this.Controls.Add(this.btnPrintPrimal);
+            this.Controls.Add(this.btnPrintTwoPhase);
+            this.Controls.Add(this.btnCuttingPlane);
             this.Controls.Add(this.btnKnapsack);
             this.Controls.Add(this.btnRevisedSimplex);
             this.Controls.Add(this.btnSensitivity);
@@ -201,6 +257,11 @@
         private System.Windows.Forms.Button btnRevisedSimplex;
         private System.Windows.Forms.Button btnSensitivity;
         private System.Windows.Forms.Button btnKnapsack;
+        private System.Windows.Forms.Button btnCuttingPlane;
+        private System.Windows.Forms.Button btnPrintTwoPhase;
+        private System.Windows.Forms.Button btnPrintPrimal;
+        private System.Windows.Forms.Button btnPrintDual;
+        private System.Windows.Forms.Button btnPrintCuttingPlane;
     }
 }
 
