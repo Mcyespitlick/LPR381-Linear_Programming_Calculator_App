@@ -34,6 +34,10 @@ namespace LP_Algorythms_App
         RevisedSimplexResult revisedResult = null; // holds Binv/basis too, needed later for Sensitivity Analysis
         SensitivityAnalysis sensitivityAnalysis = new SensitivityAnalysis();
 
+        Knapsack knapsack = new Knapsack();
+        KnapsackOutput knapsackOutput = new KnapsackOutput();
+        KnapsackResult knapsackResult = null;
+
 
         public Form1()
         {
@@ -252,6 +256,47 @@ namespace LP_Algorythms_App
             catch (Exception ex)
             {
                 Console.WriteLine("Sensitivity analysis failed: " + ex.Message);
+            }
+        }
+        //================================================================================================//
+        private void btnKnapsack_Click(object sender, EventArgs e)
+        {
+            if (data == null || !data.Any())
+            {
+                Console.WriteLine("No data loaded. Click 'Load data from file' first.");
+                return;
+            }
+
+            // Re-parse straight from the raw input so this button works standalone,
+            // without depending on the LP simplex buttons having been clicked first.
+            if (!conversion.ToCanonical(data, out parsedModel))
+            {
+                Console.WriteLine("Failed to parse the input file.");
+                return;
+            }
+
+            if (knapsack.Solve(parsedModel, out knapsackResult))
+            {
+                Console.WriteLine("Branch & Bound Knapsack completed: " + knapsackResult.Status);
+
+                knapsackOutput.ResultToGrid(dgvTable, knapsackResult);
+
+                if (knapsackResult.Status == "Optimal")
+                {
+                    SaveFileDialog saveFileDialog = new SaveFileDialog();
+                    saveFileDialog.Filter = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*";
+                    saveFileDialog.Title = "Save Knapsack Output";
+                    saveFileDialog.FileName = "output.txt";
+                    if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                    {
+                        knapsackOutput.WriteToFile(saveFileDialog.FileName, knapsackResult);
+                        Console.WriteLine("Output written to " + saveFileDialog.FileName);
+                    }
+                }
+            }
+            else
+            {
+                Console.WriteLine("Branch & Bound Knapsack failed: " + knapsackResult.ErrorMessage);
             }
         }
     }
