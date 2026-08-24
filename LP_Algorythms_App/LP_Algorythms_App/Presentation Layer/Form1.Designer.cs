@@ -53,19 +53,17 @@
             // dgvTable
             // 
             this.dgvTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvTable.Location = new System.Drawing.Point(325, 73);
-            this.dgvTable.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dgvTable.Location = new System.Drawing.Point(244, 59);
             this.dgvTable.Name = "dgvTable";
             this.dgvTable.RowHeadersWidth = 51;
-            this.dgvTable.Size = new System.Drawing.Size(1625, 441);
+            this.dgvTable.Size = new System.Drawing.Size(1219, 358);
             this.dgvTable.TabIndex = 0;
             // 
             // btnExit
             // 
-            this.btnExit.Location = new System.Drawing.Point(13, 553);
-            this.btnExit.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnExit.Location = new System.Drawing.Point(10, 449);
             this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(100, 28);
+            this.btnExit.Size = new System.Drawing.Size(75, 23);
             this.btnExit.TabIndex = 1;
             this.btnExit.Text = "Exit";
             this.btnExit.UseVisualStyleBackColor = true;
@@ -73,10 +71,9 @@
             // 
             // btnLoadData
             // 
-            this.btnLoadData.Location = new System.Drawing.Point(17, 73);
-            this.btnLoadData.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnLoadData.Location = new System.Drawing.Point(13, 59);
             this.btnLoadData.Name = "btnLoadData";
-            this.btnLoadData.Size = new System.Drawing.Size(248, 28);
+            this.btnLoadData.Size = new System.Drawing.Size(186, 23);
             this.btnLoadData.TabIndex = 2;
             this.btnLoadData.Text = "Load data from file";
             this.btnLoadData.UseVisualStyleBackColor = true;
@@ -84,10 +81,9 @@
             // 
             // btnStandard
             // 
-            this.btnStandard.Location = new System.Drawing.Point(17, 145);
-            this.btnStandard.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnStandard.Location = new System.Drawing.Point(13, 118);
             this.btnStandard.Name = "btnStandard";
-            this.btnStandard.Size = new System.Drawing.Size(248, 28);
+            this.btnStandard.Size = new System.Drawing.Size(186, 23);
             this.btnStandard.TabIndex = 3;
             this.btnStandard.Text = "Standard Form";
             this.btnStandard.UseVisualStyleBackColor = true;
@@ -95,10 +91,9 @@
             // 
             // btnCanonical
             // 
-            this.btnCanonical.Location = new System.Drawing.Point(17, 110);
-            this.btnCanonical.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnCanonical.Location = new System.Drawing.Point(13, 89);
             this.btnCanonical.Name = "btnCanonical";
-            this.btnCanonical.Size = new System.Drawing.Size(248, 28);
+            this.btnCanonical.Size = new System.Drawing.Size(186, 23);
             this.btnCanonical.TabIndex = 4;
             this.btnCanonical.Text = "To canonical (redundant)";
             this.btnCanonical.UseVisualStyleBackColor = true;
@@ -106,10 +101,9 @@
             // 
             // TwoPhase
             // 
-            this.TwoPhase.Location = new System.Drawing.Point(16, 209);
-            this.TwoPhase.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.TwoPhase.Location = new System.Drawing.Point(12, 170);
             this.TwoPhase.Name = "TwoPhase";
-            this.TwoPhase.Size = new System.Drawing.Size(171, 28);
+            this.TwoPhase.Size = new System.Drawing.Size(128, 23);
             this.TwoPhase.TabIndex = 5;
             this.TwoPhase.Text = "Two-Phase";
             this.TwoPhase.UseVisualStyleBackColor = true;
@@ -117,10 +111,9 @@
             // 
             // PrimalSimplex
             // 
-            this.PrimalSimplex.Location = new System.Drawing.Point(17, 246);
-            this.PrimalSimplex.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.PrimalSimplex.Location = new System.Drawing.Point(13, 200);
             this.PrimalSimplex.Name = "PrimalSimplex";
-            this.PrimalSimplex.Size = new System.Drawing.Size(169, 28);
+            this.PrimalSimplex.Size = new System.Drawing.Size(127, 23);
             this.PrimalSimplex.TabIndex = 6;
             this.PrimalSimplex.Text = "PrimalSimplex";
             this.PrimalSimplex.UseVisualStyleBackColor = true;
@@ -129,20 +122,18 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(16, 26);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(12, 21);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(1404, 16);
+            this.label1.Size = new System.Drawing.Size(1157, 13);
             this.label1.TabIndex = 7;
             this.label1.Text = resources.GetString("label1.Text");
             this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // btnDualSimplex
             // 
-            this.btnDualSimplex.Location = new System.Drawing.Point(16, 282);
-            this.btnDualSimplex.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnDualSimplex.Location = new System.Drawing.Point(12, 229);
             this.btnDualSimplex.Name = "btnDualSimplex";
-            this.btnDualSimplex.Size = new System.Drawing.Size(171, 28);
+            this.btnDualSimplex.Size = new System.Drawing.Size(128, 23);
             this.btnDualSimplex.TabIndex = 8;
             this.btnDualSimplex.Text = "Dual Simplex";
             this.btnDualSimplex.UseVisualStyleBackColor = true;
@@ -150,10 +141,9 @@
             // 
             // btnRevisedSimplex
             // 
-            this.btnRevisedSimplex.Location = new System.Drawing.Point(20, 414);
-            this.btnRevisedSimplex.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnRevisedSimplex.Location = new System.Drawing.Point(15, 336);
             this.btnRevisedSimplex.Name = "btnRevisedSimplex";
-            this.btnRevisedSimplex.Size = new System.Drawing.Size(241, 28);
+            this.btnRevisedSimplex.Size = new System.Drawing.Size(181, 23);
             this.btnRevisedSimplex.TabIndex = 9;
             this.btnRevisedSimplex.Text = "Revised Simplex";
             this.btnRevisedSimplex.UseVisualStyleBackColor = true;
@@ -161,10 +151,9 @@
             // 
             // btnSensitivity
             // 
-            this.btnSensitivity.Location = new System.Drawing.Point(20, 450);
-            this.btnSensitivity.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnSensitivity.Location = new System.Drawing.Point(15, 366);
             this.btnSensitivity.Name = "btnSensitivity";
-            this.btnSensitivity.Size = new System.Drawing.Size(241, 28);
+            this.btnSensitivity.Size = new System.Drawing.Size(181, 23);
             this.btnSensitivity.TabIndex = 10;
             this.btnSensitivity.Text = "Sensitivity Analysis";
             this.btnSensitivity.UseVisualStyleBackColor = true;
@@ -172,10 +161,9 @@
             // 
             // btnKnapsack
             // 
-            this.btnKnapsack.Location = new System.Drawing.Point(20, 487);
-            this.btnKnapsack.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnKnapsack.Location = new System.Drawing.Point(15, 396);
             this.btnKnapsack.Name = "btnKnapsack";
-            this.btnKnapsack.Size = new System.Drawing.Size(241, 28);
+            this.btnKnapsack.Size = new System.Drawing.Size(181, 23);
             this.btnKnapsack.TabIndex = 11;
             this.btnKnapsack.Text = "Branch && Bound Knapsack";
             this.btnKnapsack.UseVisualStyleBackColor = true;
@@ -183,10 +171,9 @@
             // 
             // btnCuttingPlane
             // 
-            this.btnCuttingPlane.Location = new System.Drawing.Point(17, 318);
-            this.btnCuttingPlane.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnCuttingPlane.Location = new System.Drawing.Point(13, 258);
             this.btnCuttingPlane.Name = "btnCuttingPlane";
-            this.btnCuttingPlane.Size = new System.Drawing.Size(169, 28);
+            this.btnCuttingPlane.Size = new System.Drawing.Size(127, 23);
             this.btnCuttingPlane.TabIndex = 12;
             this.btnCuttingPlane.Text = "CuttingPlane";
             this.btnCuttingPlane.UseVisualStyleBackColor = true;
@@ -194,49 +181,50 @@
             // 
             // btnPrintTwoPhase
             // 
-            this.btnPrintTwoPhase.Location = new System.Drawing.Point(208, 209);
-            this.btnPrintTwoPhase.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnPrintTwoPhase.Location = new System.Drawing.Point(156, 170);
             this.btnPrintTwoPhase.Name = "btnPrintTwoPhase";
-            this.btnPrintTwoPhase.Size = new System.Drawing.Size(100, 28);
+            this.btnPrintTwoPhase.Size = new System.Drawing.Size(75, 23);
             this.btnPrintTwoPhase.TabIndex = 13;
             this.btnPrintTwoPhase.Text = "Print";
             this.btnPrintTwoPhase.UseVisualStyleBackColor = true;
+            this.btnPrintTwoPhase.Click += new System.EventHandler(this.btnPrintTwoPhase_Click);
             // 
             // btnPrintPrimal
             // 
-            this.btnPrintPrimal.Location = new System.Drawing.Point(208, 246);
-            this.btnPrintPrimal.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnPrintPrimal.Location = new System.Drawing.Point(156, 200);
             this.btnPrintPrimal.Name = "btnPrintPrimal";
-            this.btnPrintPrimal.Size = new System.Drawing.Size(100, 28);
+            this.btnPrintPrimal.Size = new System.Drawing.Size(75, 23);
             this.btnPrintPrimal.TabIndex = 14;
             this.btnPrintPrimal.Text = "Print";
             this.btnPrintPrimal.UseVisualStyleBackColor = true;
+            this.btnPrintPrimal.Click += new System.EventHandler(this.btnPrintPrimal_Click);
             // 
             // btnPrintDual
             // 
-            this.btnPrintDual.Location = new System.Drawing.Point(208, 282);
-            this.btnPrintDual.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnPrintDual.Location = new System.Drawing.Point(156, 229);
             this.btnPrintDual.Name = "btnPrintDual";
-            this.btnPrintDual.Size = new System.Drawing.Size(100, 28);
+            this.btnPrintDual.Size = new System.Drawing.Size(75, 23);
             this.btnPrintDual.TabIndex = 15;
             this.btnPrintDual.Text = "Print";
             this.btnPrintDual.UseVisualStyleBackColor = true;
+            this.btnPrintDual.Click += new System.EventHandler(this.btnPrintDual_Click);
             // 
             // btnPrintCuttingPlane
             // 
-            this.btnPrintCuttingPlane.Location = new System.Drawing.Point(208, 318);
-            this.btnPrintCuttingPlane.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnPrintCuttingPlane.Location = new System.Drawing.Point(156, 258);
             this.btnPrintCuttingPlane.Name = "btnPrintCuttingPlane";
-            this.btnPrintCuttingPlane.Size = new System.Drawing.Size(100, 28);
+            this.btnPrintCuttingPlane.Size = new System.Drawing.Size(75, 23);
             this.btnPrintCuttingPlane.TabIndex = 16;
             this.btnPrintCuttingPlane.Text = "Print";
             this.btnPrintCuttingPlane.UseVisualStyleBackColor = true;
+            this.btnPrintCuttingPlane.Click += new System.EventHandler(this.btnPrintCuttingPlane_Click);
             // 
             // btnBranchBound
             // 
-            this.btnBranchBound.Location = new System.Drawing.Point(20, 376);
+            this.btnBranchBound.Location = new System.Drawing.Point(15, 306);
+            this.btnBranchBound.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnBranchBound.Name = "btnBranchBound";
-            this.btnBranchBound.Size = new System.Drawing.Size(241, 23);
+            this.btnBranchBound.Size = new System.Drawing.Size(181, 19);
             this.btnBranchBound.TabIndex = 17;
             this.btnBranchBound.Text = "Branch && Bound";
             this.btnBranchBound.UseVisualStyleBackColor = true;
@@ -244,9 +232,9 @@
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1924, 628);
+            this.ClientSize = new System.Drawing.Size(1443, 510);
             this.Controls.Add(this.btnBranchBound);
             this.Controls.Add(this.btnPrintCuttingPlane);
             this.Controls.Add(this.btnPrintDual);
@@ -265,7 +253,6 @@
             this.Controls.Add(this.btnLoadData);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.dgvTable);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "Form1";
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.dgvTable)).EndInit();

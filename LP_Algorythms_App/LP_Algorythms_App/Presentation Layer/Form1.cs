@@ -134,10 +134,17 @@ namespace LP_Algorythms_App
 
         private void TwoPhase_Click(object sender, EventArgs e)
         {
+            if (standardModel == null)
+            {
+                Console.WriteLine("No standard model to solve.");
+                return;
+            }
 
             if (reused_Algorythms.TwoPhase(standardModel, out TwoPhasedResolved))
             {
+                int tables = TwoPhasedResolved.tablues.Count;
                 Console.WriteLine("Two-Phased successfully converted");
+                handler.StandardToGrid(dgvTable, TwoPhasedResolved.tablues[tables-1], parsedModel);
             } else
             {
                 Console.WriteLine("Two-Phase failed");
@@ -156,6 +163,7 @@ namespace LP_Algorythms_App
             if (reused_Algorythms.PrimalSimplex(standardModel, TwoPhasedResolved, out PrimalResolved))
             {
                 Console.WriteLine("Primal Simplex successfully done");
+                handler.StandardToGrid(dgvTable, PrimalResolved.tablues.Last(), parsedModel);
             }
             else
             {
@@ -172,25 +180,6 @@ namespace LP_Algorythms_App
                 Console.WriteLine("No standard model available. Click 'To Standard' first.");
                 return;
             }
-
-            /*   this was for testing
-            StandardModel t = new StandardModel();
-            t.ObjectiveType = "max";
-            t.ObjectiveCoefficients = new List<double> { 2, 3, 0, 0 };
-            t.ObjectiveFunctionRHS = 0;
-            t.VariableNames = new List<string> { "x1", "x2", "s1", "s2" };
-            t.SignRestrictions = new List<string> { "none", "none", "none", "none" };
-            t.Constraints = new List<Business_Layer.Constraint>
-{
-            new Business_Layer.Constraint { Coefficients = new List<double> { -1, -1, 1, 0 }, Relation = "<=", RHS = -2 },
-            new Business_Layer.Constraint { Coefficients = new List<double> { -1, -2, 0, 1 }, Relation = "<=", RHS = -3 }
-};
-            ResolvedModel testinput = new ResolvedModel { tablues = new List<StandardModel> { t } };
-
-            bool ok = reused_Algorythms.DualSimplex2(testinput, out DualResolved);
-            */
-
-
 
             bool ok = reused_Algorythms.DualSimplex(PrimalResolved, out DualResolved);
             if (ok)
@@ -237,6 +226,7 @@ namespace LP_Algorythms_App
             }
         }
 
+        #region
         private void btnSensitivity_Click(object sender, EventArgs e)
         {
             if (revisedResult == null)
@@ -262,7 +252,10 @@ namespace LP_Algorythms_App
                 Console.WriteLine("Sensitivity analysis failed: " + ex.Message);
             }
         }
+        #endregion
         //================================================================================================//
+
+        #region Button to do Knapsack
         private void btnKnapsack_Click(object sender, EventArgs e)
         {
             if (data == null || !data.Any())
@@ -306,27 +299,18 @@ namespace LP_Algorythms_App
 
         private void btnCuttingPlane_Click(object sender, EventArgs e)
         {
-            
+
+            if (PrimalResolved == null)
+            {
+                Console.WriteLine("No Primal Simplex model to cut on.");
+                return;
+            }
+
             bool ok = cuttingPlane.CuttingPlaneAlgo(PrimalResolved, out CutPlaneOutput);
             if (ok)
             {
-                Console.WriteLine("CuttingPlane completed: " + (CutPlaneOutput.EndResult ?? "result unknown"));
-
-                SaveFileDialog saveFileDialog = new SaveFileDialog();
-                saveFileDialog.Filter = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*";
-                saveFileDialog.Title = "Save Cutting Plane Output";
-                saveFileDialog.FileName = "CuttingPlaneOutput.txt";
-                if (saveFileDialog.ShowDialog() == DialogResult.OK)
-                {
-                    knapsackOutput.WriteToFile(saveFileDialog.FileName, knapsackResult);
-                    Console.WriteLine("Output written to " + saveFileDialog.FileName);
-                }
-
-
-                if (CutPlaneOutput.tablues != null && CutPlaneOutput.tablues.Count > 0)
-                {
-                    handler.WriteResolvedModel(CutPlaneOutput, "Cutting Plane", saveFileDialog.FileName);
-                }
+                handler.StandardToGrid(dgvTable, CutPlaneOutput.tablues.Last(), parsedModel);
+                
             }
             else
             {
@@ -593,6 +577,119 @@ namespace LP_Algorythms_App
                     dgvTable,
                     branchBoundResult.BestNode.Tableau,
                     parsedModel);
+            }
+        }
+
+        #endregion
+
+        private void btnPrintTwoPhase_Click(object sender, EventArgs e)
+        {
+
+            if (TwoPhasedResolved == null)
+            {
+                Console.WriteLine("No two-phase output to print.");
+                return;
+            }
+
+            Console.WriteLine("CuttingPlane completed: " + (TwoPhasedResolved.EndResult ?? "result unknown"));
+
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*";
+            saveFileDialog.Title = "Save Cutting Plane Output";
+            saveFileDialog.FileName = "Two-PhaseOutput.txt";
+
+
+            
+            if (TwoPhasedResolved.tablues != null && TwoPhasedResolved.tablues.Count > 0)
+            {
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    handler.WriteResolvedModel(TwoPhasedResolved, "Two-Phase", saveFileDialog.FileName);
+                    MessageBox.Show("Written to:\n" + saveFileDialog.FileName);
+                }
+            }
+        }
+
+        private void btnPrintCuttingPlane_Click(object sender, EventArgs e)
+        {
+
+            if (CutPlaneOutput == null)
+            {
+                Console.WriteLine("No Cutting plane output to print.");
+                return;
+            }
+
+            Console.WriteLine("CuttingPlane completed: " + (CutPlaneOutput.EndResult ?? "result unknown"));
+
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*";
+            saveFileDialog.Title = "Save Cutting Plane Output";
+            saveFileDialog.FileName = "CuttingPlaneOutput.txt";
+
+
+
+            if (CutPlaneOutput.tablues != null && CutPlaneOutput.tablues.Count > 0)
+            {
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    handler.WriteResolvedModel(CutPlaneOutput, "Cutting Plane", saveFileDialog.FileName);
+                    MessageBox.Show("Written to:\n" + saveFileDialog.FileName);
+                }
+            }
+        }
+
+        private void btnPrintPrimal_Click(object sender, EventArgs e)
+        {
+            if (PrimalResolved == null)
+            {
+                Console.WriteLine("No Primal Simplex output to print.");
+                return;
+            }
+
+
+            Console.WriteLine("PrimalSimplex completed: " + (PrimalResolved.EndResult ?? "result unknown"));
+
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*";
+            saveFileDialog.Title = "Save Primal Simplex Output";
+            saveFileDialog.FileName = "PrimalSimplexOutput.txt";
+
+
+            
+            if (PrimalResolved.tablues != null && PrimalResolved.tablues.Count > 0)
+            {
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    handler.WriteResolvedModel(PrimalResolved, "Primal Simplex", saveFileDialog.FileName);
+                    MessageBox.Show("Written to:\n" + saveFileDialog.FileName);
+                }
+            }
+        }
+
+        private void btnPrintDual_Click(object sender, EventArgs e)
+        {
+            if (CutPlaneOutput == null)
+            {
+                Console.WriteLine("No Dual Simplex output to print.");
+                return;
+            }
+
+            Console.WriteLine("Dual Simplex Completed completed: " + (DualResolved.EndResult ?? "result unknown"));
+
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*";
+            saveFileDialog.Title = "Save Dual Simplex Output";
+            saveFileDialog.FileName = "DualSimplexOutput.txt";
+
+
+            
+            if (DualResolved.tablues != null && DualResolved.tablues.Count > 0)
+            {
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    handler.WriteResolvedModel(DualResolved, "Dual Simplex", saveFileDialog.FileName);
+                    MessageBox.Show("Written to:\n" + saveFileDialog.FileName);
+                }
             }
         }
     }

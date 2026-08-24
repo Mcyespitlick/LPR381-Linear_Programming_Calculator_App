@@ -160,7 +160,7 @@ namespace LP_Algorythms_App.Business_Layer
 
 
             }
-
+            table.Rows[1 + ExtraRow].Cells[table.ColumnCount-1].Value = standardModel.ObjectiveFunctionRHS;
 
             firstrow = standardModel.ObjectiveCoefficients.Count;
             ursCounter = 0;
@@ -190,28 +190,7 @@ namespace LP_Algorythms_App.Business_Layer
 
         public bool WriteResolvedModel(ResolvedModel model, string AlgorythmName, string Path)
         {
-            /*
-            var OutputString = new StringBuilder();
-            int TableCount = 1;
 
-            OutputString.AppendLine("=========================================");
-            OutputString.AppendLine(AlgorythmName + " ALGORITHM");
-            OutputString.AppendLine("=========================================");
-            OutputString.AppendLine();
-
-            if (model.EndResult.ToLower() == "error")
-            {
-                OutputString.AppendLine("Error in calculations");
-                return OutputString.ToString();
-            }
-
-            foreach (StandardModel table in model.tablues)
-            {
-
-            }
-
-            return OutputString.ToString();
-            */
             try
             {
                 StringBuilder OutputString = new StringBuilder();

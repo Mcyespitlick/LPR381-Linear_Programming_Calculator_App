@@ -7,31 +7,35 @@
       "RelativeMoniker": "D:0:0:{11327DD4-18A9-4BC6-A155-A78A98884A9B}|LP_Algorythms_App\\LP_Algorythms_App.csproj|solutionrelative:lp_algorythms_app\\presentation layer\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{11327DD4-18A9-4BC6-A155-A78A98884A9B}|LP_Algorythms_App\\LP_Algorythms_App.csproj|C:\\Belgium Campus\\3rd year\\LPR381\\LPR381-Linear_Programming_Calculator_App\\LP_Algorythms_App\\lp_algorythms_app\\business layer\\model.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{11327DD4-18A9-4BC6-A155-A78A98884A9B}|LP_Algorythms_App\\LP_Algorythms_App.csproj|solutionrelative:lp_algorythms_app\\business layer\\model.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{11327DD4-18A9-4BC6-A155-A78A98884A9B}|LP_Algorythms_App\\LP_Algorythms_App.csproj|c:\\belgium campus\\3rd year\\lpr381\\lpr381-linear_programming_calculator_app\\lp_algorythms_app\\lp_algorythms_app\\business layer\\datahandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{11327DD4-18A9-4BC6-A155-A78A98884A9B}|LP_Algorythms_App\\LP_Algorythms_App.csproj|solutionrelative:lp_algorythms_app\\business layer\\datahandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{11327DD4-18A9-4BC6-A155-A78A98884A9B}|LP_Algorythms_App\\LP_Algorythms_App.csproj|C:\\Belgium Campus\\3rd year\\LPR381\\LPR381-Linear_Programming_Calculator_App\\LP_Algorythms_App\\lp_algorythms_app\\presentation layer\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{11327DD4-18A9-4BC6-A155-A78A98884A9B}|LP_Algorythms_App\\LP_Algorythms_App.csproj|solutionrelative:lp_algorythms_app\\presentation layer\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{11327DD4-18A9-4BC6-A155-A78A98884A9B}|LP_Algorythms_App\\LP_Algorythms_App.csproj|c:\\belgium campus\\3rd year\\lpr381\\lpr381-linear_programming_calculator_app\\lp_algorythms_app\\lp_algorythms_app\\business layer\\cuttingplane.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{11327DD4-18A9-4BC6-A155-A78A98884A9B}|LP_Algorythms_App\\LP_Algorythms_App.csproj|C:\\Belgium Campus\\3rd year\\LPR381\\LPR381-Linear_Programming_Calculator_App\\LP_Algorythms_App\\lp_algorythms_app\\business layer\\datahandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{11327DD4-18A9-4BC6-A155-A78A98884A9B}|LP_Algorythms_App\\LP_Algorythms_App.csproj|solutionrelative:lp_algorythms_app\\business layer\\datahandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{11327DD4-18A9-4BC6-A155-A78A98884A9B}|LP_Algorythms_App\\LP_Algorythms_App.csproj|C:\\Belgium Campus\\3rd year\\LPR381\\LPR381-Linear_Programming_Calculator_App\\LP_Algorythms_App\\lp_algorythms_app\\business layer\\model.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{11327DD4-18A9-4BC6-A155-A78A98884A9B}|LP_Algorythms_App\\LP_Algorythms_App.csproj|solutionrelative:lp_algorythms_app\\business layer\\model.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{11327DD4-18A9-4BC6-A155-A78A98884A9B}|LP_Algorythms_App\\LP_Algorythms_App.csproj|C:\\Belgium Campus\\3rd year\\LPR381\\LPR381-Linear_Programming_Calculator_App\\LP_Algorythms_App\\lp_algorythms_app\\business layer\\cuttingplane.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{11327DD4-18A9-4BC6-A155-A78A98884A9B}|LP_Algorythms_App\\LP_Algorythms_App.csproj|solutionrelative:lp_algorythms_app\\business layer\\cuttingplane.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{11327DD4-18A9-4BC6-A155-A78A98884A9B}|LP_Algorythms_App\\LP_Algorythms_App.csproj|c:\\belgium campus\\3rd year\\lpr381\\lpr381-linear_programming_calculator_app\\lp_algorythms_app\\lp_algorythms_app\\business layer\\reused_algorythms.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{11327DD4-18A9-4BC6-A155-A78A98884A9B}|LP_Algorythms_App\\LP_Algorythms_App.csproj|c:\\belgium campus\\3rd year\\lpr381\\lpr381-linear_programming_calculator_app\\lp_algorythms_app\\lp_algorythms_app\\business layer\\branch\u0026bound.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{11327DD4-18A9-4BC6-A155-A78A98884A9B}|LP_Algorythms_App\\LP_Algorythms_App.csproj|solutionrelative:lp_algorythms_app\\business layer\\branch\u0026bound.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{11327DD4-18A9-4BC6-A155-A78A98884A9B}|LP_Algorythms_App\\LP_Algorythms_App.csproj|C:\\Belgium Campus\\3rd year\\LPR381\\LPR381-Linear_Programming_Calculator_App\\LP_Algorythms_App\\lp_algorythms_app\\business layer\\reused_algorythms.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{11327DD4-18A9-4BC6-A155-A78A98884A9B}|LP_Algorythms_App\\LP_Algorythms_App.csproj|solutionrelative:lp_algorythms_app\\business layer\\reused_algorythms.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{11327DD4-18A9-4BC6-A155-A78A98884A9B}|LP_Algorythms_App\\LP_Algorythms_App.csproj|c:\\belgium campus\\3rd year\\lpr381\\lpr381-linear_programming_calculator_app\\lp_algorythms_app\\lp_algorythms_app\\business layer\\knapsackmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{11327DD4-18A9-4BC6-A155-A78A98884A9B}|LP_Algorythms_App\\LP_Algorythms_App.csproj|C:\\Belgium Campus\\3rd year\\LPR381\\LPR381-Linear_Programming_Calculator_App\\LP_Algorythms_App\\lp_algorythms_app\\business layer\\knapsackmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{11327DD4-18A9-4BC6-A155-A78A98884A9B}|LP_Algorythms_App\\LP_Algorythms_App.csproj|solutionrelative:lp_algorythms_app\\business layer\\knapsackmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{11327DD4-18A9-4BC6-A155-A78A98884A9B}|LP_Algorythms_App\\LP_Algorythms_App.csproj|c:\\belgium campus\\3rd year\\lpr381\\lpr381-linear_programming_calculator_app\\lp_algorythms_app\\lp_algorythms_app\\business layer\\knapsackoutput.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{11327DD4-18A9-4BC6-A155-A78A98884A9B}|LP_Algorythms_App\\LP_Algorythms_App.csproj|C:\\Belgium Campus\\3rd year\\LPR381\\LPR381-Linear_Programming_Calculator_App\\LP_Algorythms_App\\lp_algorythms_app\\business layer\\knapsackoutput.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{11327DD4-18A9-4BC6-A155-A78A98884A9B}|LP_Algorythms_App\\LP_Algorythms_App.csproj|solutionrelative:lp_algorythms_app\\business layer\\knapsackoutput.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
@@ -54,13 +58,13 @@
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "Model.cs",
               "DocumentMoniker": "C:\\Belgium Campus\\3rd year\\LPR381\\LPR381-Linear_Programming_Calculator_App\\LP_Algorythms_App\\LP_Algorythms_App\\Business Layer\\Model.cs",
               "RelativeDocumentMoniker": "LP_Algorythms_App\\Business Layer\\Model.cs",
               "ToolTip": "C:\\Belgium Campus\\3rd year\\LPR381\\LPR381-Linear_Programming_Calculator_App\\LP_Algorythms_App\\LP_Algorythms_App\\Business Layer\\Model.cs",
               "RelativeToolTip": "LP_Algorythms_App\\Business Layer\\Model.cs",
-              "ViewState": "AgIAAB4AAAAAAAAAAADwvy0AAAABAAAAAAAAAA==",
+              "ViewState": "AgIAABgAAAAAAAAAAAAAwC0AAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-08-08T11:22:29.636Z",
               "IsPinned": true,
@@ -74,7 +78,7 @@
               "RelativeDocumentMoniker": "LP_Algorythms_App\\Presentation Layer\\Form1.cs",
               "ToolTip": "C:\\Belgium Campus\\3rd year\\LPR381\\LPR381-Linear_Programming_Calculator_App\\LP_Algorythms_App\\LP_Algorythms_App\\Presentation Layer\\Form1.cs",
               "RelativeToolTip": "LP_Algorythms_App\\Presentation Layer\\Form1.cs",
-              "ViewState": "AgIAAI0AAAAAAAAAAAAmwKEAAAAJAAAAAAAAAA==",
+              "ViewState": "AgIAAGsCAAAAAAAAAAAQwEsCAAAhAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-08-08T08:19:52.712Z",
               "IsPinned": true,
@@ -110,7 +114,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 1,
               "Title": "Form1.cs [Design]",
               "DocumentMoniker": "C:\\Belgium Campus\\3rd year\\LPR381\\LPR381-Linear_Programming_Calculator_App\\LP_Algorythms_App\\LP_Algorythms_App\\Presentation Layer\\Form1.cs",
               "RelativeDocumentMoniker": "LP_Algorythms_App\\Presentation Layer\\Form1.cs",
@@ -122,7 +126,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "Reused_Algorythms.cs",
               "DocumentMoniker": "C:\\Belgium Campus\\3rd year\\LPR381\\LPR381-Linear_Programming_Calculator_App\\LP_Algorythms_App\\LP_Algorythms_App\\Business Layer\\Reused_Algorythms.cs",
               "RelativeDocumentMoniker": "LP_Algorythms_App\\Business Layer\\Reused_Algorythms.cs",
@@ -130,12 +134,11 @@
               "RelativeToolTip": "LP_Algorythms_App\\Business Layer\\Reused_Algorythms.cs",
               "ViewState": "AgIAAGQDAAAAAAAAAAAqwH8DAAAoAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-23T14:23:23.774Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-08-23T14:23:23.774Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "KnapsackModel.cs",
               "DocumentMoniker": "C:\\Belgium Campus\\3rd year\\LPR381\\LPR381-Linear_Programming_Calculator_App\\LP_Algorythms_App\\LP_Algorythms_App\\Business Layer\\KnapsackModel.cs",
               "RelativeDocumentMoniker": "LP_Algorythms_App\\Business Layer\\KnapsackModel.cs",
@@ -143,12 +146,11 @@
               "RelativeToolTip": "LP_Algorythms_App\\Business Layer\\KnapsackModel.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-23T11:50:10.119Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-08-23T11:50:10.119Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 8,
               "Title": "Knapsackoutput.cs",
               "DocumentMoniker": "C:\\Belgium Campus\\3rd year\\LPR381\\LPR381-Linear_Programming_Calculator_App\\LP_Algorythms_App\\LP_Algorythms_App\\Business Layer\\Knapsackoutput.cs",
               "RelativeDocumentMoniker": "LP_Algorythms_App\\Business Layer\\Knapsackoutput.cs",
@@ -156,8 +158,7 @@
               "RelativeToolTip": "LP_Algorythms_App\\Business Layer\\Knapsackoutput.cs",
               "ViewState": "AgIAAA0AAAAAAAAAAAAgwCMAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-23T13:28:48.258Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-08-23T13:28:48.258Z"
             },
             {
               "$type": "Document",
@@ -167,14 +168,14 @@
               "RelativeDocumentMoniker": "LP_Algorythms_App\\Business Layer\\DataHandler.cs",
               "ToolTip": "C:\\Belgium Campus\\3rd year\\LPR381\\LPR381-Linear_Programming_Calculator_App\\LP_Algorythms_App\\LP_Algorythms_App\\Business Layer\\DataHandler.cs",
               "RelativeToolTip": "LP_Algorythms_App\\Business Layer\\DataHandler.cs",
-              "ViewState": "AgIAAKsAAAAAAAAAAAAUwNMAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAJQAAAAAAAAAAAAYwKIAAAA+AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-08-23T13:03:29.459Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 9,
               "Title": "SensitivityAnalysis.cs",
               "DocumentMoniker": "C:\\Belgium Campus\\3rd year\\LPR381\\LPR381-Linear_Programming_Calculator_App\\LP_Algorythms_App\\LP_Algorythms_App\\Business Layer\\SensitivityAnalysis.cs",
               "RelativeDocumentMoniker": "LP_Algorythms_App\\Business Layer\\SensitivityAnalysis.cs",
@@ -182,8 +183,7 @@
               "RelativeToolTip": "LP_Algorythms_App\\Business Layer\\SensitivityAnalysis.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAACYAAABGAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-21T11:39:43.586Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-08-21T11:39:43.586Z"
             },
             {
               "$type": "Document",
@@ -193,14 +193,27 @@
               "RelativeDocumentMoniker": "LP_Algorythms_App\\Business Layer\\CuttingPlane.cs",
               "ToolTip": "C:\\Belgium Campus\\3rd year\\LPR381\\LPR381-Linear_Programming_Calculator_App\\LP_Algorythms_App\\LP_Algorythms_App\\Business Layer\\CuttingPlane.cs",
               "RelativeToolTip": "LP_Algorythms_App\\Business Layer\\CuttingPlane.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAeAAAAAAAAAA==",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAAwBcAAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-08-18T12:09:25.087Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 5,
+              "Title": "Branch\u0026Bound.cs",
+              "DocumentMoniker": "C:\\Belgium Campus\\3rd year\\LPR381\\LPR381-Linear_Programming_Calculator_App\\LP_Algorythms_App\\LP_Algorythms_App\\Business Layer\\Branch\u0026Bound.cs",
+              "RelativeDocumentMoniker": "LP_Algorythms_App\\Business Layer\\Branch\u0026Bound.cs",
+              "ToolTip": "C:\\Belgium Campus\\3rd year\\LPR381\\LPR381-Linear_Programming_Calculator_App\\LP_Algorythms_App\\LP_Algorythms_App\\Business Layer\\Branch\u0026Bound.cs",
+              "RelativeToolTip": "LP_Algorythms_App\\Business Layer\\Branch\u0026Bound.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAAcAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-24T10:09:40.097Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
               "Title": "DataConversion.cs",
               "DocumentMoniker": "C:\\Belgium Campus\\3rd year\\LPR381\\LPR381-Linear_Programming_Calculator_App\\LP_Algorythms_App\\LP_Algorythms_App\\Business Layer\\DataConversion.cs",
               "RelativeDocumentMoniker": "LP_Algorythms_App\\Business Layer\\DataConversion.cs",
@@ -208,8 +221,7 @@
               "RelativeToolTip": "LP_Algorythms_App\\Business Layer\\DataConversion.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAALQBAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-13T14:09:10.039Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-08-13T14:09:10.039Z"
             }
           ]
         }
