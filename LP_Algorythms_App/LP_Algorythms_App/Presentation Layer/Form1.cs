@@ -18,6 +18,8 @@ namespace LP_Algorythms_App
         Reused_Algorythms reused_Algorythms = new Reused_Algorythms();
 
         CuttingPlane cuttingPlane = new CuttingPlane();
+        Branch_Bound branchBound = new Branch_Bound();
+        Branch_Bound.Result branchBoundResult = null;
 
 
         String[][] data = null;
@@ -331,6 +333,269 @@ namespace LP_Algorythms_App
                 Console.WriteLine("Cutting Plane failed.");
             }
         }
+
+        private void btnBranchBound_Click(object sender, EventArgs e)
+        {
+
+
+            if (data == null || !data.Any())
+            {
+                Console.WriteLine(
+                    "No data loaded. Click 'Load data from file' first.");
+
+                return;
+            }
+
+            // ============================================================
+            // PARSE INPUT
+            // ============================================================
+
+            if (!conversion.ToCanonical(
+                data,
+                out parsedModel))
+            {
+                Console.WriteLine(
+                    "Failed to parse input.");
+
+                return;
+            }
+
+            Console.WriteLine(
+                "Input successfully parsed.");
+
+            // ============================================================
+            // CONVERT TO STANDARD FORM
+            // ============================================================
+
+            if (!conversion.ToStandard(
+                parsedModel,
+                out standardModel))
+            {
+                Console.WriteLine(
+                    "Failed to convert to StandardModel.");
+
+                return;
+            }
+
+            Console.WriteLine(
+                "StandardModel successfully created.");
+
+            // ============================================================
+            // TWO PHASE
+            // ============================================================
+
+            if (!reused_Algorythms.TwoPhase(
+                standardModel,
+                out TwoPhasedResolved))
+            {
+                Console.WriteLine(
+                    "Two-Phase failed.");
+
+                return;
+            }
+
+            Console.WriteLine(
+                "Two-Phase result: "
+                + TwoPhasedResolved.EndResult);
+
+            // ============================================================
+            // CHECK TWO-PHASE INFEASIBILITY
+            // ============================================================
+
+            if (!string.IsNullOrEmpty(
+                TwoPhasedResolved.EndResult))
+            {
+                string status =
+                    TwoPhasedResolved.EndResult.ToLower();
+
+                if (status.Contains("infeasible"))
+                {
+                    Console.WriteLine();
+                    Console.WriteLine(
+                        "======================================");
+
+                    Console.WriteLine(
+                        "BRANCH AND BOUND");
+
+                    Console.WriteLine(
+                        "======================================");
+
+                    Console.WriteLine(
+                        "The LP relaxation is infeasible.");
+
+                    Console.WriteLine(
+                        "Branch and Bound cannot continue.");
+
+                    Console.WriteLine(
+                        "======================================");
+
+                    return;
+                }
+            }
+
+            // ============================================================
+            // PRIMAL SIMPLEX
+            // ============================================================
+
+            if (!reused_Algorythms.PrimalSimplex(
+                standardModel,
+                TwoPhasedResolved,
+                out PrimalResolved))
+            {
+                Console.WriteLine(
+                    "Primal Simplex failed.");
+
+                return;
+            }
+
+            Console.WriteLine(
+                "Primal Simplex result: "
+                + PrimalResolved.EndResult);
+
+            // ============================================================
+            // RUN BRANCH AND BOUND
+            // ============================================================
+
+            if (!branchBound.Solve(
+                standardModel,
+                PrimalResolved,
+                out branchBoundResult))
+            {
+                Console.WriteLine(
+                    "Branch and Bound failed.");
+
+                return;
+            }
+
+            // ============================================================
+            // DISPLAY RESULT
+            // ============================================================
+
+            Console.WriteLine();
+            Console.WriteLine(
+                "======================================");
+
+            Console.WriteLine(
+                "BRANCH AND BOUND RESULT");
+
+            Console.WriteLine(
+                "======================================");
+
+            Console.WriteLine(
+                "Status: "
+                + branchBoundResult.Status);
+
+            Console.WriteLine(
+                "Optimal: "
+                + branchBoundResult.Optimal);
+
+            Console.WriteLine(
+                "Total Nodes: "
+                + branchBoundResult.TotalNodes);
+
+            Console.WriteLine(
+                "Pruned Nodes: "
+                + branchBoundResult.PrunedNodes);
+
+            if (!double.IsNaN(
+                branchBoundResult.Z))
+            {
+                Console.WriteLine(
+                    "Z = "
+                    + branchBoundResult.Z);
+            }
+
+            if (branchBoundResult.X != null)
+            {
+                Console.WriteLine();
+                Console.WriteLine(
+                    "Solution:");
+
+                for (int i = 0;
+                     i < branchBoundResult.X.Length;
+                     i++)
+                {
+                    Console.WriteLine(
+                        "x" +
+                        (i + 1) +
+                        " = " +
+                        Math.Round(
+                            branchBoundResult.X[i],
+                            6));
+                }
+            }
+
+            Console.WriteLine(
+                "======================================");
+
+            // ============================================================
+            // DISPLAY NODE INFORMATION
+            // ============================================================
+
+            if (branchBoundResult.Nodes != null)
+            {
+                Console.WriteLine();
+                Console.WriteLine(
+                    "NODE INFORMATION");
+
+                Console.WriteLine(
+                    "--------------------------------------");
+
+                foreach (Branch_Bound.Node node
+                    in branchBoundResult.Nodes)
+                {
+                    Console.WriteLine(
+                        "Node "
+                        + node.NodeId
+                        + " | Parent: "
+                        + node.ParentId
+                        + " | Depth: "
+                        + node.Depth);
+
+                    Console.WriteLine(
+                        "Branch: "
+                        + node.BranchDescription);
+
+                    Console.WriteLine(
+                        "Z/Bound: "
+                        + Math.Round(
+                            node.Bound,
+                            6));
+
+                    if (node.IsInteger)
+                    {
+                        Console.WriteLine(
+                            "Result: INTEGER");
+                    }
+                    else if (node.IsInfeasible)
+                    {
+                        Console.WriteLine(
+                            "Result: INFEASIBLE");
+                    }
+                    else if (node.IsPruned)
+                    {
+                        Console.WriteLine(
+                            "Result: PRUNED - "
+                            + node.PruneReason);
+                    }
+
+                    Console.WriteLine();
+                }
+            }
+
+            // ============================================================
+            // DISPLAY BEST TABLEAU
+            // ============================================================
+
+            if (branchBoundResult.BestNode != null)
+            {
+                handler.StandardToGrid(
+                    dgvTable,
+                    branchBoundResult.BestNode.Tableau,
+                    parsedModel);
+            }
+        }
     }
+    
     //================================================================================================//
 }

@@ -29,3 +29,14 @@ C:\Users\Tinyiko Mnisi\Documents\GitHub\LPR381-Linear_Programming_Calculator_App
 C:\Users\Tinyiko Mnisi\Documents\GitHub\LPR381-Linear_Programming_Calculator_App\LP_Algorythms_App\LP_Algorythms_App\obj\Debug\LP_Algorythms_App.csproj.CoreCompileInputs.cache
 C:\Users\Tinyiko Mnisi\Documents\GitHub\LPR381-Linear_Programming_Calculator_App\LP_Algorythms_App\LP_Algorythms_App\obj\Debug\LP_Algorythms_App.exe
 C:\Users\Tinyiko Mnisi\Documents\GitHub\LPR381-Linear_Programming_Calculator_App\LP_Algorythms_App\LP_Algorythms_App\obj\Debug\LP_Algorythms_App.pdb
+C:\Users\xolin\source\repos\New folder\LPR-project\LP_Algorythms_App\LP_Algorythms_App\bin\Debug\LP_Algorythms_App.exe.config
+C:\Users\xolin\source\repos\New folder\LPR-project\LP_Algorythms_App\LP_Algorythms_App\bin\Debug\LP_Algorythms_App.exe
+C:\Users\xolin\source\repos\New folder\LPR-project\LP_Algorythms_App\LP_Algorythms_App\bin\Debug\LP_Algorythms_App.pdb
+C:\Users\xolin\source\repos\New folder\LPR-project\LP_Algorythms_App\LP_Algorythms_App\obj\Debug\LP_Algorythms_App.csproj.AssemblyReference.cache
+C:\Users\xolin\source\repos\New folder\LPR-project\LP_Algorythms_App\LP_Algorythms_App\obj\Debug\LP_Algorythms_App.exe.config
+C:\Users\xolin\source\repos\New folder\LPR-project\LP_Algorythms_App\LP_Algorythms_App\obj\Debug\LP_Algorythms_App.Form1.resources
+C:\Users\xolin\source\repos\New folder\LPR-project\LP_Algorythms_App\LP_Algorythms_App\obj\Debug\LP_Algorythms_App.Properties.Resources.resources
+C:\Users\xolin\source\repos\New folder\LPR-project\LP_Algorythms_App\LP_Algorythms_App\obj\Debug\LP_Algorythms_App.csproj.GenerateResource.cache
+C:\Users\xolin\source\repos\New folder\LPR-project\LP_Algorythms_App\LP_Algorythms_App\obj\Debug\LP_Algorythms_App.csproj.CoreCompileInputs.cache
+C:\Users\xolin\source\repos\New folder\LPR-project\LP_Algorythms_App\LP_Algorythms_App\obj\Debug\LP_Algorythms_App.exe
+C:\Users\xolin\source\repos\New folder\LPR-project\LP_Algorythms_App\LP_Algorythms_App\obj\Debug\LP_Algorythms_App.pdb
