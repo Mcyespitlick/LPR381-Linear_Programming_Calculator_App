@@ -51,6 +51,8 @@
     <Compile Include="Business Layer\DataConversion.cs" />
     <Compile Include="Business Layer\DataHandler.cs" />
     <Compile Include="Business Layer\Knapsack.cs" />
+    <Compile Include="Business Layer\KnapsackModel.cs" />
+    <Compile Include="Business Layer\Knapsackoutput.cs" />
     <Compile Include="Business Layer\Model.cs" />
     <Compile Include="Business Layer\Reused_Algorythms.cs" />
     <Compile Include="Business Layer\Revised Simplex\RevisedSimplex.cs" />
@@ -62,6 +64,9 @@
     </Compile>
     <Compile Include="Presentation Layer\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Presentation Layer\SensitivityAnalysisForm.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

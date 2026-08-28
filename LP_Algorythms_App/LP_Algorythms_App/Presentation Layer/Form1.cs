@@ -231,25 +231,21 @@ namespace LP_Algorythms_App
         {
             if (revisedResult == null)
             {
-                Console.WriteLine("Run Revised Simplex first to generate sensitivity information.");
+                MessageBox.Show("Run Revised Simplex first, then select Sensitivity Analysis.",
+                    "Sensitivity Analysis", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
             try
             {
-                string report = sensitivityAnalysis.CreateReport(revisedResult);
-                Console.WriteLine(report);
-
-                SaveFileDialog saveFileDialog = new SaveFileDialog();
-                saveFileDialog.Filter = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*";
-                saveFileDialog.Title = "Save Sensitivity Analysis";
-                saveFileDialog.FileName = "sensitivity-analysis.txt";
-                if (saveFileDialog.ShowDialog() == DialogResult.OK)
-                    System.IO.File.WriteAllText(saveFileDialog.FileName, report);
+                using (var optionsForm = new SensitivityAnalysisForm(revisedResult, sensitivityAnalysis,
+                    updatedResult => revisedResult = updatedResult))
+                    optionsForm.ShowDialog(this);
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Sensitivity analysis failed: " + ex.Message);
+                MessageBox.Show("Sensitivity analysis failed: " + ex.Message,
+                    "Sensitivity Analysis", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         #endregion

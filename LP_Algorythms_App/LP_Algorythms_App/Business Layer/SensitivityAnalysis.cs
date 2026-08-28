@@ -15,7 +15,7 @@ namespace LP_Algorythms_App.Business_Layer
         public bool IsBasic;
     }
 
-    internal class SensitivityAnalysis
+    public class SensitivityAnalysis
     {
         private const double Tolerance = 1e-9;
 
