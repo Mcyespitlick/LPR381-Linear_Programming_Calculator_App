@@ -106,6 +106,8 @@ namespace LP_Algorythms_App.Business_Layer
 
         #endregion
 
+
+        #region
         public void StandardToGrid(DataGridView table, StandardModel standardModel, ParsedModel parsedModel) //see if you can drop the last variable (Parsed Model). it does nothing
         {
             table.Columns.Clear();
@@ -158,7 +160,7 @@ namespace LP_Algorythms_App.Business_Layer
 
 
             }
-
+            table.Rows[1 + ExtraRow].Cells[table.ColumnCount-1].Value = standardModel.ObjectiveFunctionRHS;
 
             firstrow = standardModel.ObjectiveCoefficients.Count;
             ursCounter = 0;
@@ -182,8 +184,71 @@ namespace LP_Algorythms_App.Business_Layer
                     }
                 }
             }
+        }
+        #endregion
 
 
+        public bool WriteResolvedModel(ResolvedModel model, string AlgorythmName, string Path)
+        {
+
+            try
+            {
+                StringBuilder OutputString = new StringBuilder();
+
+                OutputString.AppendLine("=========================================");
+                OutputString.AppendLine(AlgorythmName + " ALGORITHM");
+                OutputString.AppendLine("=========================================");
+                OutputString.AppendLine();
+
+                for (int t = 0; t < model.tablues.Count; t++)
+                {
+                    StandardModel table = model.tablues[t];
+
+                    OutputString.AppendLine("Iteration " + t);
+
+                    // column headers
+                    OutputString.AppendLine(string.Join("\t", table.VariableNames) + "\tRHS");
+
+                    // z row
+                    for (int j = 0; j < table.ObjectiveCoefficients.Count; j++)
+                    {
+                        OutputString.Append(Math.Round(table.ObjectiveCoefficients[j], 3) + "\t");
+                    }
+                    OutputString.AppendLine(Math.Round(table.ObjectiveFunctionRHS, 3).ToString());
+
+                    // w row, if this tableau still has one
+                    if (table.TwoPhaseObjective != null)
+                    {
+                        for (int j = 0; j < table.TwoPhaseObjective.Coefficients.Count; j++)
+                        {
+                            OutputString.Append(Math.Round(table.TwoPhaseObjective.Coefficients[j], 3) + "\t");
+                        }
+                        OutputString.AppendLine(Math.Round(table.TwoPhaseObjective.RHS, 3).ToString());
+                    }
+
+                    // constraint rows
+                    foreach (Constraint c in table.Constraints)
+                    {
+                        for (int j = 0; j < c.Coefficients.Count; j++)
+                        {
+                            OutputString.Append(Math.Round(c.Coefficients[j], 3) + "\t");
+                        }
+                        OutputString.AppendLine(Math.Round(c.RHS, 3).ToString());
+                    }
+
+                    OutputString.AppendLine();
+                }
+
+                OutputString.AppendLine("Result: " + model.EndResult);
+
+                File.WriteAllText(Path, OutputString.ToString());
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Could not write output file: " + ex.Message);
+                return false;
+            }
         }
     }
 }
