@@ -33,7 +33,6 @@
             this.btnExit = new System.Windows.Forms.Button();
             this.btnLoadData = new System.Windows.Forms.Button();
             this.btnStandard = new System.Windows.Forms.Button();
-            this.btnCanonical = new System.Windows.Forms.Button();
             this.TwoPhase = new System.Windows.Forms.Button();
             this.PrimalSimplex = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -81,7 +80,7 @@
             // 
             // btnStandard
             // 
-            this.btnStandard.Location = new System.Drawing.Point(13, 118);
+            this.btnStandard.Location = new System.Drawing.Point(15, 88);
             this.btnStandard.Name = "btnStandard";
             this.btnStandard.Size = new System.Drawing.Size(186, 23);
             this.btnStandard.TabIndex = 3;
@@ -89,19 +88,9 @@
             this.btnStandard.UseVisualStyleBackColor = true;
             this.btnStandard.Click += new System.EventHandler(this.btnCanonical_Click);
             // 
-            // btnCanonical
-            // 
-            this.btnCanonical.Location = new System.Drawing.Point(13, 89);
-            this.btnCanonical.Name = "btnCanonical";
-            this.btnCanonical.Size = new System.Drawing.Size(186, 23);
-            this.btnCanonical.TabIndex = 4;
-            this.btnCanonical.Text = "To canonical (redundant)";
-            this.btnCanonical.UseVisualStyleBackColor = true;
-            this.btnCanonical.Click += new System.EventHandler(this.btnCanonical_Click_1);
-            // 
             // TwoPhase
             // 
-            this.TwoPhase.Location = new System.Drawing.Point(12, 170);
+            this.TwoPhase.Location = new System.Drawing.Point(15, 146);
             this.TwoPhase.Name = "TwoPhase";
             this.TwoPhase.Size = new System.Drawing.Size(128, 23);
             this.TwoPhase.TabIndex = 5;
@@ -111,7 +100,7 @@
             // 
             // PrimalSimplex
             // 
-            this.PrimalSimplex.Location = new System.Drawing.Point(13, 200);
+            this.PrimalSimplex.Location = new System.Drawing.Point(16, 176);
             this.PrimalSimplex.Name = "PrimalSimplex";
             this.PrimalSimplex.Size = new System.Drawing.Size(127, 23);
             this.PrimalSimplex.TabIndex = 6;
@@ -131,7 +120,7 @@
             // 
             // btnDualSimplex
             // 
-            this.btnDualSimplex.Location = new System.Drawing.Point(12, 229);
+            this.btnDualSimplex.Location = new System.Drawing.Point(15, 205);
             this.btnDualSimplex.Name = "btnDualSimplex";
             this.btnDualSimplex.Size = new System.Drawing.Size(128, 23);
             this.btnDualSimplex.TabIndex = 8;
@@ -171,7 +160,7 @@
             // 
             // btnCuttingPlane
             // 
-            this.btnCuttingPlane.Location = new System.Drawing.Point(13, 258);
+            this.btnCuttingPlane.Location = new System.Drawing.Point(16, 234);
             this.btnCuttingPlane.Name = "btnCuttingPlane";
             this.btnCuttingPlane.Size = new System.Drawing.Size(127, 23);
             this.btnCuttingPlane.TabIndex = 12;
@@ -181,7 +170,7 @@
             // 
             // btnPrintTwoPhase
             // 
-            this.btnPrintTwoPhase.Location = new System.Drawing.Point(156, 170);
+            this.btnPrintTwoPhase.Location = new System.Drawing.Point(159, 146);
             this.btnPrintTwoPhase.Name = "btnPrintTwoPhase";
             this.btnPrintTwoPhase.Size = new System.Drawing.Size(75, 23);
             this.btnPrintTwoPhase.TabIndex = 13;
@@ -191,7 +180,7 @@
             // 
             // btnPrintPrimal
             // 
-            this.btnPrintPrimal.Location = new System.Drawing.Point(156, 200);
+            this.btnPrintPrimal.Location = new System.Drawing.Point(159, 176);
             this.btnPrintPrimal.Name = "btnPrintPrimal";
             this.btnPrintPrimal.Size = new System.Drawing.Size(75, 23);
             this.btnPrintPrimal.TabIndex = 14;
@@ -201,7 +190,7 @@
             // 
             // btnPrintDual
             // 
-            this.btnPrintDual.Location = new System.Drawing.Point(156, 229);
+            this.btnPrintDual.Location = new System.Drawing.Point(159, 205);
             this.btnPrintDual.Name = "btnPrintDual";
             this.btnPrintDual.Size = new System.Drawing.Size(75, 23);
             this.btnPrintDual.TabIndex = 15;
@@ -211,7 +200,7 @@
             // 
             // btnPrintCuttingPlane
             // 
-            this.btnPrintCuttingPlane.Location = new System.Drawing.Point(156, 258);
+            this.btnPrintCuttingPlane.Location = new System.Drawing.Point(159, 234);
             this.btnPrintCuttingPlane.Name = "btnPrintCuttingPlane";
             this.btnPrintCuttingPlane.Size = new System.Drawing.Size(75, 23);
             this.btnPrintCuttingPlane.TabIndex = 16;
@@ -222,7 +211,7 @@
             // btnBranchBound
             // 
             this.btnBranchBound.Location = new System.Drawing.Point(15, 306);
-            this.btnBranchBound.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnBranchBound.Margin = new System.Windows.Forms.Padding(2);
             this.btnBranchBound.Name = "btnBranchBound";
             this.btnBranchBound.Size = new System.Drawing.Size(181, 19);
             this.btnBranchBound.TabIndex = 17;
@@ -248,7 +237,6 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.PrimalSimplex);
             this.Controls.Add(this.TwoPhase);
-            this.Controls.Add(this.btnCanonical);
             this.Controls.Add(this.btnStandard);
             this.Controls.Add(this.btnLoadData);
             this.Controls.Add(this.btnExit);
@@ -267,7 +255,6 @@
         private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.Button btnLoadData;
         private System.Windows.Forms.Button btnStandard;
-        private System.Windows.Forms.Button btnCanonical;
         private System.Windows.Forms.Button TwoPhase;
         private System.Windows.Forms.Button PrimalSimplex;
         private System.Windows.Forms.Label label1;

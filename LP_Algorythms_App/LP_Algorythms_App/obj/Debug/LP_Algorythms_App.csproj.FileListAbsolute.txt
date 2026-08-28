@@ -29,3 +29,7 @@ C:\Users\Tinyiko Mnisi\Documents\GitHub\LPR381-Linear_Programming_Calculator_App
 C:\Users\Tinyiko Mnisi\Documents\GitHub\LPR381-Linear_Programming_Calculator_App\LP_Algorythms_App\LP_Algorythms_App\obj\Debug\LP_Algorythms_App.csproj.CoreCompileInputs.cache
 C:\Users\Tinyiko Mnisi\Documents\GitHub\LPR381-Linear_Programming_Calculator_App\LP_Algorythms_App\LP_Algorythms_App\obj\Debug\LP_Algorythms_App.exe
 C:\Users\Tinyiko Mnisi\Documents\GitHub\LPR381-Linear_Programming_Calculator_App\LP_Algorythms_App\LP_Algorythms_App\obj\Debug\LP_Algorythms_App.pdb
+C:\Belgium Campus\3rd year\LPR381\LPR381-Linear_Programming_Calculator_App\LP_Algorythms_App\LP_Algorythms_App\bin\Debug\LP_Algorythms_App.exe.manifest
+C:\Belgium Campus\3rd year\LPR381\LPR381-Linear_Programming_Calculator_App\LP_Algorythms_App\LP_Algorythms_App\bin\Debug\LP_Algorythms_App.application
+C:\Belgium Campus\3rd year\LPR381\LPR381-Linear_Programming_Calculator_App\LP_Algorythms_App\LP_Algorythms_App\obj\Debug\LP_Algorythms_App.exe.manifest
+C:\Belgium Campus\3rd year\LPR381\LPR381-Linear_Programming_Calculator_App\LP_Algorythms_App\LP_Algorythms_App\obj\Debug\LP_Algorythms_App.application
